@@ -1,3 +1,3 @@
 var config = {};
 
-config.socket = 'http://192.168.1.2:3000';
+config.socket = 'http://188.226.249.240:3000';
