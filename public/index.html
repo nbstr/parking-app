@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html ng-app="app">
+<head>
+    
+    <title>Parking</title>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, maximum-scale=1.0, user-scalable=no" />
+    
+    <!-- CONFIG -->
+    <script type="text/javascript" src="app/config.js"></script>
+    <script language="javascript" src="http://j.maxmind.com/app/geoip.js"></script>
+    <!-- JQUERY -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <!-- FLAT UI & BOOTSTRAP -->
+    <link href="lib/flat_ui/bootstrap/css/bootstrap.css" rel="stylesheet">
+    <link href="lib/flat_ui/css/flat-ui.css" rel="stylesheet"/>
+    <!-- GLOBAL CSS -->
+    <link href="css/style.css" rel="stylesheet"/>
+
+    <!-- ANGULARJS -->
+    <script type="text/javascript" src="lib/angular.min.js"></script>
+    <script type="text/javascript" src="lib/angular-route.min.js"></script>
+    <!-- APPLICATION -->
+    <script type="text/javascript" src="app/routes.js"></script>
+    <!-- CONTROLLERS -->
+    <script type="text/javascript" src="app/ctrl/home.js"></script>
+    <!-- MODULES -->
+    <script src="http://188.226.249.240:3000/socket.io/socket.io.js"></script>
+    <script type="text/javascript" src="app/mod/socket.js"></script>
+</head>
+<body>
+    <div ng-view></div>
+    <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false&libraries=geometry"></script>
+    <!-- FLAT UI JAVASCRIPT -->
+    <script src="lib/flat_ui/js/jquery-ui-1.10.3.custom.min.js"></script>
+    <script src="lib/flat_ui/js/jquery.ui.touch-punch.min.js"></script>
+    <script src="lib/flat_ui/js/bootstrap.min.js"></script>
+    <script src="lib/flat_ui/js/bootstrap-select.js"></script>
+    <script src="lib/flat_ui/js/bootstrap-switch.js"></script>
+    <script src="lib/flat_ui/js/flatui-checkbox.js"></script>
+    <script src="lib/flat_ui/js/flatui-radio.js"></script>
+    <script src="lib/flat_ui/js/jquery.tagsinput.js"></script>
+    <script src="lib/flat_ui/js/jquery.placeholder.js"></script>
+    <script src="lib/flat_ui/js/application.js"></script>
+</body>
+</html>
