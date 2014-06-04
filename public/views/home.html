@@ -1,4 +1,41 @@
-<div class="block col-xs-12">
+<div class="block" id="block-warning">
+	<div class="row">
+		<div class="img-button">
+			<img src="images/whistle.png" class="contain">
+		</div>
+		<div class="block-danger" ng-click="ok()">
+			<h1>DANGER</h1>
+			<p>
+				Controllers reported near your car !
+			</p>
+		</div>
+	</div>
+</div>
+<div class="mask"></div>
+
+<div class="block" id="block-home">
+	<h3>Select parking type</h3>
+	<div class="row">
+		<div class="img-button">
+			<img src="images/img_{{(parking.type) && 'disc' || 'park'}}_on.png" class="contain" ng-click="parking.type=!parking.type">
+		</div>
+	</div>
 	<button class="btn btn-embossed btn-hg btn-inverse btn-spacing" ng-click="park()">PARK HERE</button>
-	<button class="btn btn-embossed btn-hg btn-danger btn-spacing" ng-click="report()">REPORT<br>CONTROLLER</button><br><br>
+	<button class="btn btn-embossed btn-hg btn-danger btn-spacing btn-report" ng-click="report()">REPORT<br>CONTROLLER</button><br><br>
+</div>
+
+<div class="block" id="block-thanks">
+	<div class="row">
+		<div class="img-button">
+			<img src="images/whistle.png" class="contain">
+		</div>
+	</div>
+	<div class="block-info">
+		<h1>Thank you</h1>
+		<p>
+			We thank,you very much for reporting the controllers. All your fellow citizen will be noticed right away!
+		</p>
+	</div>
+
+	<button class="btn btn-embossed btn-hg btn-success" ng-click="youre_welcome()">BACK</button>
 </div>

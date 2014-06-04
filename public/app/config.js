@@ -12,11 +12,17 @@ var $environments = {
 	// DEFINES CURRENT HOST
 	host:location.protocol + "//" + location.hostname + (location.port && ":" + location.port) + "/",
 	// ENVIRONMENTS
-	local:{
-		url:'http://192.168.17.6:3000'
+	local_ip:{
+		url:'http://192.168.17.6:3000/',
+		host:'http://192.168.17.6:3000/'
+	},
+	localhost:{
+		url:'http://192.168.17.6:3000/',
+		host:'http://localhost:3000/'
 	},
 	remote:{
-		url:'http://188.226.249.240:3000'
+		url:'http://188.226.249.240:3000/',
+		host:'http://188.226.249.240:3000/'
 	}
 };
 
@@ -28,6 +34,7 @@ set_environment($environments[$environments.default].url);
 	for(environment in $environments){
 		if($environments.host == $environments[environment].host){
 			set_environment($environments[environment].url);
+			// console.log('environment: ' + environment);
 			break;
 		}
 	}

@@ -1,22 +1,123 @@
 body{
 	margin:auto;
+	padding: 10px;
 	text-align: center;
-	padding-top: 40px;
-	background-color: #ECF0F1;
+	background-color: RGBA(230, 230, 230, 1);
 	width:100%;
 	height: 100%;
 	font-size: 30px;
 	@media (max-width: 768px) {
 	  font-size:10px;
 	}
+	box-sizing: border-box;
+    -moz-box-sizing: border-box;
 }
 .block{
-	padding-top:100px;
+	box-sizing: border-box;
+    -moz-box-sizing: border-box;
+	padding-top:30px;
 	width: 100%;
 	margin: auto;
+}
+.block-info{
+	background-color: white;
+	border-radius: 5px;
+	border-bottom: 4px solid #AAA;
+	padding:20px 30px;
+	margin: 40px;
+}
+.block-info h1{
+	font-size: 24px;
+	text-align: center;
+	text-transform: uppercase;
+	color:RGBA(209, 44, 49, 1);
+	font-weight: bold;
+}
+.block-info p{
+	font-size: 14px;
+	text-align: center;
+	text-transform: uppercase;
+	color:#333;
+}
+.block-danger{
+	box-sizing: border-box;
+    -moz-box-sizing: border-box;
+	background-color: RGBA(235, 107, 102, 1);
+	border-radius: 5px;
+	border-bottom: 4px solid RGBA(195, 64, 50, 1);
+	padding:20px 30px;
+	cursor: pointer;
+	width: 90%;
+	margin:40px auto;
+}
+.block-danger h1{
+	font-size: 24px;
+	text-align: center;
+	text-transform: uppercase;
+	color:#FFF;
+	font-weight: bold;
+}
+.block-danger p{
+	font-size: 14px;
+	text-align: center;
+	text-transform: uppercase;
+	color:#FFF;
+	width: 100%;
 }
 .btn-spacing{
 	display: block;
 	width: 100%;
 	margin-bottom:20px;
+}
+.btn-report{
+	height:140px;
+	line-height: 40px;
+	background-color: RGBA(209, 44, 49, 1);
+	font-size: 30px;
+}
+h3{
+	font-size: 16px;
+	text-align: center;
+	text-transform: uppercase;
+	color:#333;
+}
+.contain{
+	width: 100%;
+}
+.row{
+	margin:40px auto;
+	width:100%;
+}
+.img-button{
+	cursor: pointer;
+	width: 40%;
+	padding:20px;
+	margin: auto;
+	display: inline-block;
+	vertical-align: top;
+}
+.img-button:hover{
+	opacity: 0.7;
+}
+#block-thanks{
+	display: none;
+}
+#block-warning{
+	box-sizing: border-box;
+    -moz-box-sizing: border-box;
+	position: fixed;
+	/*display: none;*/
+	z-index: 10000;
+	background-color: white;
+	margin: auto;
+	width: 100%;
+}
+.mask{
+	position: fixed;
+	top:0px;left:0px;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0,0,0,0.7);
+	/*display: none;*/
+	z-index: 9999;
 }

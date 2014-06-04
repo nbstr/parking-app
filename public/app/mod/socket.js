@@ -22,7 +22,11 @@ angular.module('Socket', [])
                 });
                 console.log(distance);
                 if(true){ // if(distance < 20){
-                    alert('WARNING: Controller reported at ' + distance + ' m');
+                    //alert('WARNING: Controller reported at ' + distance + ' m');
+
+                    $('#block-warning, .mask').fadeIn(200, function(){
+                        //..
+                    });
                     console.log('my coord: ' + position.coords.latitude + ', ' + position.coords.longitude);
                     console.log('his coord: ' + data.coord.lat + ', ' + data.coord.lng);
                     console.log('distance: ' + distance + 'm');
