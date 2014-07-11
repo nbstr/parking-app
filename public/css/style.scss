@@ -1,7 +1,14 @@
 /*VARIABLES COLORS */
 
 $backColor:#F2F1F1;
-$titleColor:#393536;
+$titleColor:rgba(0,0,0,0.6);
+
+/*VARIABLES BUTTONS*/
+
+$blueBtn:#F2F1F1;
+$lightBlueBtn:#F2F1F1;
+$greenBtn:#F2F1F1;
+$redBtn:#F2F1F1;
 
 
 
@@ -9,6 +16,9 @@ $titleColor:#393536;
 
 
 body{
+
+	background-color: $backColor;
+    font-family: 'Lato', sans-serif;
 
 	section{
 	margin-top:70px;
@@ -25,10 +35,9 @@ body{
 	margin: 0 auto;
 
 	}
-    background-color: $backColor;
-    font-family: Arial, Helvetica, sans-serif;
 
     h1{
+    color:$titleColor;
     text-transform:uppercase;
     font-size:1.4em;
     margin-top:100px;
