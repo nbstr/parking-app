@@ -9,7 +9,8 @@ $btnTextColor: #FFF;
 $blueBtn:#3F55AF;
 $blueBtnBorder: #284083;
 
-$lightBlueBtn:#F2F1F1;
+$lightBlueBtn:#50ADE5;
+$lightBlueBtnBorder: #3C86AD;
 
 $greenBtn:#F2F1F1;
 
@@ -146,7 +147,6 @@ body{
 				@include borderBtn;
 				background-color: $redBtn;
 				border-color: $redBtnBorder;
-
 			}
 
 			&.blueBtn{
@@ -160,24 +160,30 @@ body{
 				background-color:$greenBtn;
 				border-color: $greenBtnBorder;
 			}
+
+			&.lightBlueBtn{
+				@include borderBtn;
+				background-color: $lightBlueBtn;
+				border-color: $lightBlueBtnBorder;
+			}
 		}
 	}
 
-/* #PARK HERE DISC*/
+	/* #PARK HERE DISC*/
 
+#park-here-disc{
+	time{
 
-time{
-
-	display:block;
-	font-size:2.5em;
-	text-align:center;
-	font-weight:bold;
-	font-family: 'Lato', sans-serif;
+		display:block;
+		font-size:2.5em;
+		text-align:center;
+		font-weight:bold;
+		font-family: 'Lato', sans-serif;
+	}
 }
 
 
-
-/*PARK HERE NOTES*/
+	/* #PARK HERE NOTES */
 
 #park-here-notes{
 
@@ -196,5 +202,30 @@ time{
 		text-transform: uppercase;
 		color:$titleColor;
 		padding:5px;
+	}
+}
+
+
+	/* #MAIN SCREEN PARKED */
+
+#main-screen-parked{
+
+	margin:0;
+
+	h1{
+		padding:0;
+		margin:0;
+		margin-bottom:15px;
+
+	}
+	
+	span time{
+		font-size:2em;
+		color:red;
+		font-weight:bold;
+	}
+
+	.btn-group{
+		position:initial;
 	}
 }
