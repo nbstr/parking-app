@@ -26,6 +26,7 @@ body {
     margin-bottom: 40px;
     font-weight: 900; }
 
+/*STYLES SHARED AMONG EACH SECTION */
 section {
   margin-top: 50px;
   /*STYLING PLACERHOLDER*/ }
@@ -148,3 +149,46 @@ section {
     background-repeat: no-repeat; }
   #main-screen-parked .btn-group {
     position: initial; }
+
+/* #REPORT-CONTROLLER */
+#report-controller nav {
+  position: fixed;
+  top: 0;
+  display: block;
+  width: 100%;
+  color: rgba(0, 0, 0, 0.6);
+  font-weight: bold; }
+  #report-controller nav span:first-child {
+    position: absolute;
+    top: 20px;
+    left: 20px; }
+  #report-controller nav span:last-child {
+    position: absolute;
+    top: 20px;
+    right: 20px; }
+#report-controller img {
+  max-width: 50%;
+  text-align: center;
+  margin-top: 35px;
+  margin-bottom: 0; }
+#report-controller .thank-you {
+  text-transform: initial;
+  text-align: justify;
+  width: 75%;
+  background: white;
+  border-radius: 10px;
+  border-top: 4px solid #b5b5b4;
+  min-height: 50px;
+  margin: 0 auto;
+  border-top: 0;
+  border-bottom: 4px solid;
+  border-color: #b5b5b4; }
+  #report-controller .thank-you p {
+    padding: 15px;
+    padding-top: 0; }
+  #report-controller .thank-you h1 {
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    font-weight: bold;
+    padding-top: 10px; }
