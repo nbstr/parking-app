@@ -198,7 +198,11 @@ section {
   display: block;
   width: 100%;
   color: rgba(0, 0, 0, 0.6);
-  font-weight: bold; }
+  font-weight: bold;
+  font-size: 1.1em; }
+  @media screen and (min-width: 360px) {
+    #report-controller nav {
+      font-size: 1.3em; } }
   #report-controller nav span:first-child {
     position: absolute;
     top: 20px;
@@ -212,6 +216,9 @@ section {
   text-align: center;
   margin-top: 35px;
   margin-bottom: 0; }
+  @media screen and (min-width: 360px) {
+    #report-controller img {
+      max-width: 60%; } }
 #report-controller .thank-you {
   text-transform: initial;
   text-align: justify;
@@ -224,6 +231,11 @@ section {
   border-top: 0;
   border-bottom: 4px solid;
   border-color: #b5b5b4; }
+  @media screen and (min-width: 360px) {
+    #report-controller .thank-you {
+      width: 85%;
+      margin-top: 20px;
+      min-height: 250px; } }
   #report-controller .thank-you p {
     padding: 15px;
     padding-top: 0; }

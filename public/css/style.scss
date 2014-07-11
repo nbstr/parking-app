@@ -300,6 +300,11 @@ body{
 		width:100%;
 		color: $titleColor;
 		font-weight:bold;
+		font-size:1.1em;
+
+			@media screen and (min-width: 360px){
+				font-size:1.3em;
+			}
 
 		& span:first-child{
 
@@ -321,6 +326,10 @@ body{
 		text-align:center;
 		margin-top: 35px;
 		margin-bottom: 0;
+
+		@media screen and (min-width: 360px){
+			max-width:60%;
+		}
 	}
 
 	.thank-you{
@@ -333,9 +342,15 @@ body{
 		border-bottom:4px solid;
 		border-color:$whiteInputBorder;
 
+		@media screen and (min-width: 360px){
+			width:85%;
+			margin-top:20px;
+			min-height:250px;
+		}
+
 		p{
-		padding:15px;
-		padding-top:0;
+			padding:15px;
+			padding-top:0;
 		}
 
 		h1{
