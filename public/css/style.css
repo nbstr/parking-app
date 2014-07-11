@@ -49,6 +49,11 @@ section {
     border-radius: 10px;
     border-top: 4px solid #b5b5b4;
     min-height: 50px; }
+    @media screen and (min-width: 360px) {
+      section input {
+        font-size: 1.2em;
+        width: 85%;
+        min-height: 100px; } }
   section ::-webkit-input-placeholder {
     font-size: 2em;
     font-family: 'Lato', sans-serif;
@@ -76,6 +81,9 @@ section {
     bottom: 20px;
     left: 0;
     right: 0; }
+    @media screen and (min-width: 360px) {
+      section .btn-group {
+        bottom: 40px; } }
   section button {
     border: 0;
     text-decoration: none;
@@ -90,7 +98,8 @@ section {
     @media screen and (min-width: 360px) {
       section button {
         font-size: 1.8em;
-        width: 90%; } }
+        width: 85%;
+        min-height: 60px; } }
     section button.redBtn {
       border-radius: 10px;
       border-bottom: 4px solid;
@@ -123,6 +132,9 @@ section {
   text-align: center;
   font-weight: bold;
   font-family: 'Lato', sans-serif; }
+  @media screen and (min-width: 360px) {
+    #park-here-disc time {
+      font-size: 3em; } }
 
 /* #PARK HERE NOTES */
 #park-here-notes h1 {

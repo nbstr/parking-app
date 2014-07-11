@@ -71,21 +71,21 @@ body{
 
 
 	.wrap{
-	text-align:center;
-	margin: 0 auto;
+		text-align:center;
+		margin: 0 auto;
 
 	}
 
     h1{
-    color:$titleColor;
-    text-transform:uppercase;
-    font-size:1.2em;
-    margin-top:80px;
-    margin-bottom:40px;
-    font-weight:900;
+	    color:$titleColor;
+	    text-transform:uppercase;
+	    font-size:1.2em;
+	    margin-top:80px;
+	    margin-bottom:40px;
+	    font-weight:900;
 
 	@media screen and (min-width: 360px){
-	font-size:1.5em;
+		font-size:1.5em;
 	}
 
     }
@@ -113,6 +113,11 @@ body{
 			width: 65%;
 			border: none;
 			@include whiteInput;
+			@media screen and (min-width: 360px){
+				font-size:1.2em;
+				width:85%;
+				min-height: 100px;
+			}
 		}
 
 		/*STYLING PLACERHOLDER*/
@@ -139,6 +144,11 @@ body{
 			bottom:20px;
 			left:0;
 			right:0;
+
+			@media screen and (min-width: 360px){
+				bottom:40px;
+			}
+
 		}
 
 		button {
@@ -155,7 +165,8 @@ body{
 
 			@media screen and (min-width: 360px){
 				font-size:1.8em;
-				width:90%;
+				width:85%;
+				min-height:60px;
 			}
 
 			&.redBtn,{
@@ -194,6 +205,10 @@ body{
 		text-align:center;
 		font-weight:bold;
 		font-family: 'Lato', sans-serif;
+
+		@media screen and (min-width: 360px){
+			font-size:3em;
+		}
 	}
 }
 
