@@ -1,5 +1,17 @@
+/*VARIABLES COLORS */
+/*LAYOUT MOBILE*/
 body {
-  background-color: #f2f1f1; }
-
-p {
-  color: blue; }
+  background-color: #f2f1f1;
+  font-family: Arial, Helvetica, sans-serif; }
+  body section {
+    margin-top: 70px; }
+    body section#main-screen-to-park img {
+      max-width: 45%; }
+  body .wrap {
+    text-align: center;
+    margin: 0 auto; }
+  body h1 {
+    text-transform: uppercase;
+    font-size: 1.4em;
+    margin-top: 100px;
+    margin-bottom: 50px; }
