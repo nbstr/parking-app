@@ -4,6 +4,8 @@ $backColor:#F2F1F1;
 $titleColor:rgba(0,0,0,0.6);
 $btnTextColor: #FFF;
 
+
+
 /*VARIABLES BUTTONS*/
 
 $blueBtn:#3F55AF;
@@ -32,6 +34,11 @@ $redBtnBorder:#9D1B20;
 	border-bottom:4px solid $redBtnBorder ;
 }
 
+/* HIDE SECTION (HELPER TO BUILD WEBSITE)*/
+
+.hideThis{
+	display:none;
+}
 /*LAYOUT MOBILE*/
 
 /* SMALL RESET*/
@@ -48,41 +55,42 @@ body{
     text-transform:uppercase;
 
 	section{
-	ul{
-		margin-top:80px;
-	}
-	ul li {
-		list-style-type:none;
-		text-align:center;
-		margin-top:15px;
 
-		& a{
+	margin-top:70px;
+
+		&#main-screen-to-park{
+			img{
+				max-width: 35%;
+				margin:0 10px;
+				margin-bottom: 60px;
+			}
+		}
+
+		& button {
+			border: 0;
 			text-decoration:none;
 			font-family: 'Lato', sans-serif;
-			font-size:2em;
+			font-size:1.5em;
 			font-weight:800;
 			color:$btnTextColor;
 			display:block; // to display as exemple report controller on two lines instead of one.
 			width:65%;
-			margin: 0 auto;
+			margin: 10px auto;
+			line-height:1.6em;
+		
+		
+			&.redBtn{
+				@include redBtn;
+			}
 
 			&.blueBtn{
 				@include blueBtn;
 			}
-			&.redBtn{
-				@include redBtn;
-			}
-		}
-	}
-	margin-top:70px;
-		&#main-screen-to-park{
 
-			img{
-				max-width: 35%;
-				margin:0 10px;
-			}
 		}
 	}
+
+	
 
 	.wrap{
 	text-align:center;

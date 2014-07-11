@@ -1,6 +1,10 @@
 /*VARIABLES COLORS */
 /*VARIABLES BUTTONS*/
 /*MIXIN 4 BUTTONS*/
+/* HIDE SECTION (HELPER TO BUILD WEBSITE)*/
+.hideThis {
+  display: none; }
+
 /*LAYOUT MOBILE*/
 /* SMALL RESET*/
 body, ul {
@@ -13,34 +17,31 @@ body {
   text-transform: uppercase; }
   body section {
     margin-top: 70px; }
-    body section ul {
-      margin-top: 80px; }
-    body section ul li {
-      list-style-type: none;
-      text-align: center;
-      margin-top: 15px; }
-      body section ul li a {
-        text-decoration: none;
-        font-family: 'Lato', sans-serif;
-        font-size: 2em;
-        font-weight: 800;
-        color: white;
-        display: block;
-        width: 65%;
-        margin: 0 auto; }
-        body section ul li a.blueBtn {
-          background: #3f55af;
-          padding: 10px 25px;
-          border-radius: 10px;
-          border-bottom: 4px solid #284083; }
-        body section ul li a.redBtn {
-          background: #e62423;
-          padding: 10px 25px;
-          border-radius: 10px;
-          border-bottom: 4px solid #9d1b20; }
     body section#main-screen-to-park img {
       max-width: 35%;
-      margin: 0 10px; }
+      margin: 0 10px;
+      margin-bottom: 60px; }
+    body section button {
+      border: 0;
+      text-decoration: none;
+      font-family: 'Lato', sans-serif;
+      font-size: 1.5em;
+      font-weight: 800;
+      color: white;
+      display: block;
+      width: 65%;
+      margin: 10px auto;
+      line-height: 1.6em; }
+      body section button.redBtn {
+        background: #e62423;
+        padding: 10px 25px;
+        border-radius: 10px;
+        border-bottom: 4px solid #9d1b20; }
+      body section button.blueBtn {
+        background: #3f55af;
+        padding: 10px 25px;
+        border-radius: 10px;
+        border-bottom: 4px solid #284083; }
   body .wrap {
     text-align: center;
     margin: 0 auto; }
