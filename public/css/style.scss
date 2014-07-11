@@ -85,7 +85,7 @@ body{
 	    font-weight:900;
 
 	@media screen and (min-width: 360px){
-		font-size:1.5em;
+		font-size:1.8em;
 	}
 
     }
@@ -221,6 +221,10 @@ body{
 		font-family: 'Lato' sans-serif;
 		font-size:2.0em;
 		margin-top:10px;
+
+		@media screen and (min-width: 360px){
+			font-size:2.5em;
+		}
 	}
 
 	textarea{
@@ -232,6 +236,11 @@ body{
 		text-transform: uppercase;
 		color:$titleColor;
 		padding:5px;
+
+		@media screen and (min-width: 360px){
+			min-height:280px;
+			padding:15px;
+		}
 	}
 }
 
@@ -247,8 +256,11 @@ body{
 		margin:0;
 		margin-bottom:15px;
 
+		@media screen and (min-width: 360px){
+			margin-bottom:50px;
+		}
 	}
-	
+
 	span time{
 		font-size:2em;
 		color:#C01A2C;
@@ -257,10 +269,23 @@ body{
 		background-image:url('../images/img_disc_on.png');
 		background-size:40px;
 		background-repeat:no-repeat;
+
+		@media screen and (min-width: 360px){
+			padding: 0 0 0 85px;
+			font-size:3.5em;
+			background-image:url('../images/img_disc_on.png');
+			background-size:80px;;
+		}
 	}
 
 	.btn-group{
 		position:initial;
+
+		@media screen and (min-width: 360px){
+			&:first-of-type{
+				margin-top:60px;
+			}
+		}
 	}
 }
 
