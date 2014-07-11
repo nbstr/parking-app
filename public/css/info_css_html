@@ -1,0 +1,5 @@
+Pour le moment, une <section> à la fois ne possède pas
+la classe .hideThis, les autres oui.
+
+En effet, celà permet en attendant d'implémenter jquery-mobile de cacher toutes les div que l'on ne souhaite pas afficher.
+
