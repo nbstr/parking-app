@@ -4,8 +4,6 @@ $backColor:#F2F1F1;
 $titleColor:rgba(0,0,0,0.6);
 $btnTextColor: #FFF;
 
-
-
 /*VARIABLES BUTTONS*/
 
 $blueBtn:#3F55AF;
@@ -18,20 +16,34 @@ $greenBtn:#F2F1F1;
 $redBtn:#E62423;
 $redBtnBorder:#9D1B20;
 
-/*MIXIN 4 BUTTONS*/
+$greenBtn:#18AE60;
+$greenBtnBorder:#246E36;
 
-@mixin blueBtn{
-	background:$blueBtn;
-	padding: 10px 25px;
-	border-radius: 10px;
-	border-bottom:4px solid $blueBtnBorder ;
+$whiteInput:#FFF;
+$whiteInputBorder:#B5B5B4;
+
+
+/*@MIXIN 4 BUTTONS*/
+
+
+@mixin whiteInput{
+	background: $whiteInput;
+	border-radius :10px;
+	border-top: 4px solid $whiteInputBorder;
+	min-height:50px;
 }
 
-@mixin redBtn{
-	background:$redBtn;
-	padding: 10px 25px;
-	border-radius: 10px;
-	border-bottom:4px solid $redBtnBorder ;
+@mixin inputPlaceholder{
+	font-size:2em;
+   	font-family:'Lato', sans-serif;
+   	text-transform:uppercase;
+   	text-align:center;
+}
+
+@mixin borderBtn{
+		border-radius :10px;
+		border-bottom:4px solid;
+		min-height:50px;
 }
 
 /* HIDE SECTION (HELPER TO BUILD WEBSITE)*/
@@ -39,7 +51,7 @@ $redBtnBorder:#9D1B20;
 .hideThis{
 	display:none;
 }
-/*LAYOUT MOBILE*/
+
 
 /* SMALL RESET*/
 
@@ -47,6 +59,8 @@ body,ul{
 	margin:0;
 	padding:0;
 }
+
+/*GERNERAL LAYOUT*/
 	
 body{
 
@@ -58,33 +72,74 @@ body{
 
 	margin-top:70px;
 
-		&#main-screen-to-park{
-			img{
-				max-width: 35%;
-				margin:0 10px;
-				margin-bottom: 60px;
-			}
+		img{
+			max-width: 30%;
+			margin:0 10px;
+			margin-bottom: 50px;
 		}
 
-		& button {
+		input{
+			display:block;
+			margin: 0 auto;
+			width: 65%;
+			border: none;
+			@include whiteInput;
+		}
+
+		/*STYLING PLACERHOLDER*/
+
+		::-webkit-input-placeholder {
+   			@include inputPlaceholder;
+		}
+
+		:-moz-placeholder { /* Firefox 18- */
+			@include inputPlaceholder;
+		}
+
+		::-moz-placeholder {  /* Firefox 19+ */  
+			@include inputPlaceholder;
+		}
+
+		:-ms-input-placeholder {   
+			@include inputPlaceholder;
+		}
+		
+		.btn-group{
+			position:absolute;
+			bottom:10px;
+			left:0;
+			right:0;
+		}
+
+		button {
 			border: 0;
 			text-decoration:none;
 			font-family: 'Lato', sans-serif;
-			font-size:1.5em;
+			font-size:1.2em;
 			font-weight:800;
 			color:$btnTextColor;
 			display:block; // to display as exemple report controller on two lines instead of one.
 			width:65%;
 			margin: 10px auto;
 			line-height:1.6em;
-		
-		
-			&.redBtn{
-				@include redBtn;
+
+			&.redBtn,{
+				@include borderBtn;
+				background-color: $redBtn;
+				border-color: $redBtnBorder;
+
 			}
 
 			&.blueBtn{
-				@include blueBtn;
+				@include borderBtn;
+				background-color: $blueBtn;
+				border-color: $blueBtnBorder;
+			}
+
+			&.greenBtn{
+				@include borderBtn;
+				background-color:$greenBtn;
+				border-color: $greenBtnBorder;
 			}
 
 		}
@@ -101,8 +156,8 @@ body{
     h1{
     color:$titleColor;
     text-transform:uppercase;
-    font-size:1.4em;
-    margin-top:100px;
+    font-size:1.2em;
+    margin-top:80px;
     margin-bottom:40px;
     font-weight:900;
 
