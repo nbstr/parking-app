@@ -25,6 +25,9 @@ body {
     margin-top: 80px;
     margin-bottom: 40px;
     font-weight: 900; }
+    @media screen and (min-width: 360px) {
+      body h1 {
+        font-size: 1.5em; } }
 
 /*STYLES SHARED AMONG EACH SECTION */
 section {
@@ -34,6 +37,9 @@ section {
     max-width: 30%;
     margin: 0 10px;
     margin-bottom: 60px; }
+    @media screen and (min-width: 360px) {
+      section img {
+        max-width: 40%; } }
   section input {
     display: block;
     margin: 0 auto;
@@ -81,6 +87,10 @@ section {
     width: 65%;
     margin: 10px auto;
     line-height: 1.6em; }
+    @media screen and (min-width: 360px) {
+      section button {
+        font-size: 1.8em;
+        width: 90%; } }
     section button.redBtn {
       border-radius: 10px;
       border-bottom: 4px solid;
@@ -192,5 +202,3 @@ section {
     text-align: center;
     font-weight: bold;
     padding-top: 10px; }
-
-/*MEDIA QUERY FOR LARGER RESOLUTION MIN 360px*/
