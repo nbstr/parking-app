@@ -1,8 +1,6 @@
 /*JQUERY BEHAVIOUR*/
 
-/*SELECT TYPE OF PARKING*/
-
-/* change image when button icon is clicked, from inactive to active */
+/*SELECT TYPE OF PARKING @section#main-screen-to-park"*/
 
 
 $(document).on('pageinit',function(){
@@ -10,25 +8,37 @@ $(document).on('pageinit',function(){
 	var $redirection;
 	var $warning = '<p class="warning">Please select a a type!</p>';
 	var $valueParkHere = $("#main-screen-to-park .btn-group a:first-child");
+	var $discParking = $('.disc_off');
+	var $meterParking =$('.meter_off')
 
-	/* REINIT WITH DEFAULT VALUES IN CASE USER GO BACK ON PAGE*/
-	
+	/* START reinit with default values in case user goes back on #main-screen-to-park page*/
+
 	$("#main-screen-to-park .btn-group .warning").remove();
 	$($valueParkHere).attr("href","");
+	$($discParking).attr("src","images/img_disc_off.png");
+	$($meterParking).attr("src","images/img_park_off.png")
 
-	$('.meter_off').on("tap",function(){
+
+	/*END reinit*/
+
+	$($meterParking).on("tap",function(){
+
 		$("#main-screen-to park .btn-group .warning").detach();
 		$(this).attr("src","images/img_park_on.png");
-		$('.disc_off').attr("src","images/img_disc_off.png");
+		$(this).attr("alt","meter on")
+		$($discParking).attr("src","images/img_disc_off.png");
+		$($discParking).attr("alt","disc off");
 		$redirection = "#park-here-meter";
 		$($valueParkHere).attr("href",$redirection);
 		
 	});
 
-	$('.disc_off').on("tap",function(){
+	$($discParking).on("tap",function(){
 		
 		$(this).attr("src","images/img_disc_on.png");
-		$('.meter_off').attr("src","images/img_park_off.png");
+		$(this).attr("alt","disc on");
+		$($meterParking).attr("alt","meter off");
+		$($meterParking).attr("src","images/img_park_off.png");
 		$redirection ="#park-here-disc";
 		$("#main-screen-to-park .btn-group a:first-of-type").attr("href",$redirection);
 		
