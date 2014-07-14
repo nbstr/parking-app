@@ -126,8 +126,7 @@ section {
     @media screen and (min-width: 360px) {
       section .btn-group a, section .btn-group button {
         font-size: 1.8em;
-        width: 85%;
-        min-height: 60px; } }
+        width: 85%; } }
 
 /* #PARK HERE DISC*/
 #park-here-disc time {
@@ -171,11 +170,18 @@ section {
   margin: 0; }
   #main-screen-parked h1 {
     padding: 0;
-    margin: 0;
-    margin-bottom: 15px; }
+    margin: 15px 0;
+    margin-top: 35px; }
     @media screen and (min-width: 360px) {
       #main-screen-parked h1 {
-        margin-bottom: 50px; } }
+        margin-bottom: 25px; } }
+  #main-screen-parked span {
+    display: block;
+    margin-bottom: 35px; }
+    @media screen and (min-width: 360px) {
+      #main-screen-parked span {
+        margin-bottom: 10px;
+        margin: 0; } }
   #main-screen-parked span time {
     font-size: 2em;
     color: #C01A2C;
@@ -183,18 +189,17 @@ section {
     padding: 0 0 0 50px;
     background-image: url("../images/img_disc_on.png");
     background-size: 40px;
-    background-repeat: no-repeat; }
+    background-repeat: no-repeat;
+    display: inline-block; }
     @media screen and (min-width: 360px) {
       #main-screen-parked span time {
         padding: 0 0 0 85px;
         font-size: 3.5em;
         background-image: url("../images/img_disc_on.png");
-        background-size: 80px; } }
+        background-size: 80px;
+        margin-bottom: 10px; } }
   #main-screen-parked .btn-group {
     position: initial; }
-    @media screen and (min-width: 360px) {
-      #main-screen-parked .btn-group:first-of-type {
-        margin-top: 60px; } }
 
 /* #REPORT-CONTROLLER */
 #report-controller nav {
