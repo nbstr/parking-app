@@ -50,21 +50,25 @@ body{
 		@include borderBtn;
 		background-color: $redBtn;
 		border-color: $redBtnBorder;
+		text-transform:uppercase;
 	}
 	.blueBtn{
 		@include borderBtn;
 		background-color: $blueBtn;
 		border-color: $blueBtnBorder;
+		text-transform:uppercase;
 	}
 	.greenBtn{
 		@include borderBtn;
 		background-color:$greenBtn;
 		border-color: $greenBtnBorder;
+		text-transform:uppercase;
 	}
 	.lightBlueBtn{
 		@include borderBtn;
 		background-color: $lightBlueBtn;
 		border-color: $lightBlueBtnBorder;
+		text-transform:uppercase;
 	}
 }
 

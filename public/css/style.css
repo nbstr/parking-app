@@ -1,5 +1,4 @@
 /*VARIABLES BUTTONS*/
-/*@MIXIN 4 BUTTONS*/
 /* SMALL RESET*/
 body, ul {
   margin: 0;
@@ -33,25 +32,29 @@ body {
     border-bottom: 4px solid;
     padding: 10px 0;
     background-color: #e62423;
-    border-color: #9d1b20; }
+    border-color: #9d1b20;
+    text-transform: uppercase; }
   body .blueBtn {
     border-radius: 10px;
     border-bottom: 4px solid;
     padding: 10px 0;
     background-color: #3f55af;
-    border-color: #284083; }
+    border-color: #284083;
+    text-transform: uppercase; }
   body .greenBtn {
     border-radius: 10px;
     border-bottom: 4px solid;
     padding: 10px 0;
     background-color: #18ae60;
-    border-color: #246e36; }
+    border-color: #246e36;
+    text-transform: uppercase; }
   body .lightBlueBtn {
     border-radius: 10px;
     border-bottom: 4px solid;
     padding: 10px 0;
     background-color: #50ade5;
-    border-color: #3c86ad; }
+    border-color: #3c86ad;
+    text-transform: uppercase; }
 
 /*STYLES SHARED AMONG EACH SECTION */
 section {
