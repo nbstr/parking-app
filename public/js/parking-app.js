@@ -23,6 +23,7 @@ $(document).on('pageinit',function(){
 
 	$($meterParking).on("tap",function(){
 
+		$("#main-screen-to-park .btn-group .warning").remove();
 		$(this).attr("src","images/img_park_on.png");
 		$(this).attr("alt","meter on");
 		$($discParking).attr("src","images/img_disc_off.png");
@@ -33,7 +34,8 @@ $(document).on('pageinit',function(){
 	});
 
 	$($discParking).on("tap",function(){
-		
+			
+		$("#main-screen-to-park .btn-group .warning").remove();
 		$(this).attr("src","images/img_disc_on.png");
 		$(this).attr("alt","disc on");
 		$($meterParking).attr("alt","meter off");
