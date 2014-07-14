@@ -94,6 +94,11 @@ body{
     	color:$titleColor;
     }
 
+    .warning{
+    	color:red;
+
+    }
+
     .redBtn{
 		@include borderBtn;
 		background-color: $redBtn;
