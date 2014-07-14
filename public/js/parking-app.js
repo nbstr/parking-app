@@ -6,10 +6,10 @@
 $(document).on('pageinit',function(){
 
 	var $redirection;
-	var $warning = '<p class="warning">Please select a a type!</p>';
+	var $warning = '<span class="warning">Please select a a type!</span>';
 	var $valueParkHere = $("#main-screen-to-park .btn-group a:first-child");
 	var $discParking = $('.disc_off');
-	var $meterParking =$('.meter_off')
+	var $meterParking =$('.meter_off');
 
 	/* START reinit with default values in case user goes back on #main-screen-to-park page*/
 
@@ -23,9 +23,8 @@ $(document).on('pageinit',function(){
 
 	$($meterParking).on("tap",function(){
 
-		$("#main-screen-to park .btn-group .warning").detach();
 		$(this).attr("src","images/img_park_on.png");
-		$(this).attr("alt","meter on")
+		$(this).attr("alt","meter on");
 		$($discParking).attr("src","images/img_disc_off.png");
 		$($discParking).attr("alt","disc off");
 		$redirection = "#park-here-meter";
@@ -47,8 +46,8 @@ $(document).on('pageinit',function(){
 	$($valueParkHere).on("tap",function(){
 
 		if($(this).attr("href")==""){
-			$("#main-screen-to-park .btn-group p").remove();
-			$("#main-screen-to-park .btn-group").prepend($warning).find("p").hide().fadeIn("slow");
+			$("#main-screen-to-park .btn-group span").remove();
+			$("#main-screen-to-park .btn-group").prepend($warning).find("span").hide().fadeIn("slow");
 		}else{
 			$("#main-screen-to-park .btn-group .warning").remove();
 		}
