@@ -1,58 +1,5 @@
-/*VARIABLES COLORS */
-
-$backColor:#F2F1F1;
-$titleColor:rgba(0,0,0,0.6);
-$btnTextColor: #FFF;
-
-/*VARIABLES BUTTONS*/
-
-$blueBtn:#3F55AF;
-$blueBtnBorder: #284083;
-
-$lightBlueBtn:#50ADE5;
-$lightBlueBtnBorder: #3C86AD;
-
-$greenBtn:#F2F1F1;
-
-$redBtn:#E62423;
-$redBtnBorder:#9D1B20;
-
-$greenBtn:#18AE60;
-$greenBtnBorder:#246E36;
-
-$whiteInput:#FFF;
-$whiteInputBorder:#B5B5B4;
-
-
-/*@MIXIN 4 BUTTONS*/
-
-
-@mixin whiteInput{
-	background: $whiteInput;
-	border-radius :10px;
-	border-top: 4px solid $whiteInputBorder;
-	min-height:50px;
-}
-
-@mixin inputPlaceholder{
-	font-size:2em;
-   	font-family:'Lato', sans-serif;
-   	text-transform:uppercase;
-   	text-align:center;
-}
-
-@mixin borderBtn{
-		border-radius :10px;
-		border-bottom:4px solid;
-		padding:10px 0;
-}
-
-/* HIDE SECTION (HELPER TO BUILD WEBSITE)*/
-
-.hideThis{
-	display:none;
-}
-
+@import "_variables.scss";
+@import "_mixins.scss";
 
 /* SMALL RESET*/
 
@@ -255,6 +202,16 @@ body{
 /*MAIN SCREEN_TO_PARK*/
 
 #main-screen-to-park{
+	
+	.warning{
+		display:inline-block;
+		margin-bottom:10px;
+
+	@media screen and (min-width: 360px){
+			font-size:1.4em;
+			margin-bottom:30px;
+		}
+	}
 	
 }
 
