@@ -19,9 +19,9 @@
 </head>
 <body ng-view >
 
-<div class="wrap">
+<div class="wrap"  data-enhanced=”false”>
 
-    <section id="landing-page" data-role="">
+    <section id="landing-page" class="" data-role="">
         
         <!-- loading page -->
 
@@ -31,56 +31,56 @@
         
         <h1>select parking type</h1>
 
-        <a href="#"><img src="images/img_park_on.png" alt="parking meter on"></a>
-        <a href="#"><img src="images/img_disc_on.png" alt="parking disc on"></a>
+        <a href="#park-here-meter"><img src="images/img_park_on.png" alt="parking meter on"></a>
+        <a href="#park-here-disc"><img src="images/img_disc_on.png" alt="parking disc on"></a>
 
          <div class="btn-group">
-            <button type="submit" class="blueBtn"  data-role="none">park here</button>
-            <button type="submit" class="redBtn" data-role="none">report controller</button>
+            <a href="#park-here-meter" class="blueBtn" data-role="none">park here</a>
+            <a href="#report-controller" class="redBtn" data-role="none">report controller</button></a>
         </div>
 
     </section>
 
 
-    <section id="park-here-meter" data-role="page">
+    <section id="park-here-meter" class="" data-role="page">
         
-        <img src="images/img_park_on.png" alt="parking meter on">
+        <img src="images/img_park_on.png" alt="parking meter on" data-role="none">
 
-        <label for="time"><input type="text" name="time" id="time" placeholder="enter time"/></label>
+        <label for="time"><input type="text" name="time" id="time" placeholder="enter time" data-role="none"/></label>
 
         <div class="btn-group">
-            <button type="submit" class="greenBtn" data-role="none">parking notes</button>
+            <a  href="#park-here-notes" class="greenBtn" data-role="none">parking notes</a>
             <button type="submit" class="blueBtn" data-role="none">confirm</button>
         </div>
 
     </section>
 
-    <section id="park-here-disc" data-role="page">
+    <section id="park-here-disc" class="" data-role="page">
 
         <img src="images/img_disc_on.png" alt="parking disc">
 
             <time>2:00</time>
 
         <div class="btn-group">
-            <button type="submit" class="greenBtn" data-role="none">parking notes</button>
+            <a href="#park-here-notes" class="greenBtn" data-role="none">parking notes</a>
             <button type="submit" class="blueBtn" data-role="none">confirm</button>
         </div>
 
     </section>
 
-    <section id="park-here-notes"  data-role="page">
+    <section id="park-here-notes" class="" data-role="page">
 
         <h1>notes</h1>
-        <label for="notes"><textarea>type your notes here...</textarea></label>
+        <label for="notes"><textarea id="notes" name="notes" data-role="none">type your notes here...</textarea></label>
 
         <div class="btn-group">
-            <button type="submit" class="greenBtn" data-role="none">save</button>
-            <button type="submit" class="redBtn" data-role="none">cancel</button>
+            <button class="greenBtn" type="submit" data-role="none">save</button>
+            <button class="redBtn" type="submit" data-role="none">cancel</button>
         </div>
 
     </section>
 
-    <section id="main-screen-parked" data-role="page">
+    <section id="main-screen-parked" class="" data-role="page">
 
         <h1>Time remaining</h1>
 
@@ -88,18 +88,18 @@
 
         <div class="btn-group">
             <button type="submit" class="greenBtn" data-role="none">go</button>
-            <button type="submit" class="blueBtn" data-role="none">+ extend stay</button>
-            <button type="submit" class="lightBlueBtn" data-role="none">dude, where is my car ?</button>
-            <button type="submit" class="redBtn" data-role="none">report controller</button>
+            <a href="#" class="blueBtn" data-role="none">+ extend stay</a>
+            <a href="google.com" class="lightBlueBtn" data-role="none">dude, where is my car ?</a>
+            <a href="#report-controller" class="redBtn" data-role="none">report controller</a>
         </div>
 
     </section>
 
 
-    <section id="report-controller" data-role="page">
+    <section id="report-controller" class="" data-role="page">
         <nav>
-            <span>back</span>
-            <span>cancel</span>
+            <span><a href="" data-role="none">back</a></span>
+            <span><a href="" data-role="none">cancel</a></span>
         </nav>
 
         <img src="images/whistle.png" alt="red whistle report controller">

@@ -44,7 +44,7 @@ $whiteInputBorder:#B5B5B4;
 @mixin borderBtn{
 		border-radius :10px;
 		border-bottom:4px solid;
-		min-height:50px;
+		padding:10px 0;
 }
 
 /* HIDE SECTION (HELPER TO BUILD WEBSITE)*/
@@ -84,11 +84,36 @@ body{
 	    margin-bottom:40px;
 	    font-weight:900;
 
-	@media screen and (min-width: 360px){
-		font-size:1.8em;
-	}
-
+		@media screen and (min-width: 360px){
+			font-size:1.8em;
+		}
     }
+
+    a{
+    	text-decoration:none;
+    	color:$titleColor;
+    }
+
+    .redBtn{
+		@include borderBtn;
+		background-color: $redBtn;
+		border-color: $redBtnBorder;
+	}
+	.blueBtn{
+		@include borderBtn;
+		background-color: $blueBtn;
+		border-color: $blueBtnBorder;
+	}
+	.greenBtn{
+		@include borderBtn;
+		background-color:$greenBtn;
+		border-color: $greenBtnBorder;
+	}
+	.lightBlueBtn{
+		@include borderBtn;
+		background-color: $lightBlueBtn;
+		border-color: $lightBlueBtnBorder;
+	}
 }
 
 /*STYLES SHARED AMONG EACH SECTION */
@@ -99,12 +124,15 @@ body{
 
 		img{
 			max-width: 30%;
-			margin:0 10px;
 			margin-bottom: 60px;
 
 			@media screen and (min-width: 360px){
 				max-width:40%;
 			}
+		}
+
+		&:nth-child(n+3) img{
+			margin: 60px 0px;
 		}
 
 		input{
@@ -151,8 +179,8 @@ body{
 
 		}
 
-		button {
-			border: 0;
+		.btn-group a, .btn-group button {
+			border:0;
 			text-decoration:none;
 			font-family: 'Lato', sans-serif;
 			font-size:1.2em;
@@ -167,30 +195,6 @@ body{
 				font-size:1.8em;
 				width:85%;
 				min-height:60px;
-			}
-
-			&.redBtn,{
-				@include borderBtn;
-				background-color: $redBtn;
-				border-color: $redBtnBorder;
-			}
-
-			&.blueBtn{
-				@include borderBtn;
-				background-color: $blueBtn;
-				border-color: $blueBtnBorder;
-			}
-
-			&.greenBtn{
-				@include borderBtn;
-				background-color:$greenBtn;
-				border-color: $greenBtnBorder;
-			}
-
-			&.lightBlueBtn{
-				@include borderBtn;
-				background-color: $lightBlueBtn;
-				border-color: $lightBlueBtnBorder;
 			}
 		}
 	}
@@ -324,8 +328,8 @@ body{
 	& img{
 		max-width:50%;
 		text-align:center;
-		margin-top: 35px;
-		margin-bottom: 0;
+		margin-top: 90px;
+		margin-bottom: 20px;
 
 		@media screen and (min-width: 360px){
 			max-width:60%;
