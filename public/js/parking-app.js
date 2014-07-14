@@ -11,6 +11,10 @@ $(document).on('pageinit',function(){
 	var $warning = '<p class="warning">Please select a a type!</p>';
 	var $valueParkHere = $("#main-screen-to-park .btn-group a:first-child");
 
+	/* REINIT WITH DEFAULT VALUES IN CASE USER GO BACK ON PAGE*/
+	
+	$("#main-screen-to-park .btn-group .warning").remove();
+	$($valueParkHere).attr("href","");
 
 	$('.meter_off').on("tap",function(){
 		$("#main-screen-to park .btn-group .warning").detach();
