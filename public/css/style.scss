@@ -242,13 +242,14 @@ body{
 		background-size:40px;
 		background-repeat:no-repeat;
 		display:inline-block;
+		margin-bottom:27px;
 
 		@media screen and (min-width: 360px){
 			padding: 0 0 0 85px;
 			font-size:3.5em;
 			background-image:url('../images/img_disc_on.png');
 			background-size:80px;
-			margin-bottom:10px;
+			margin-bottom:25px;
 
 		}
 	}
