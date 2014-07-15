@@ -182,14 +182,7 @@ body {
     @media screen and (min-width: 360px) {
       #main-screen-parked h1 {
         margin-bottom: 25px; } }
-  #main-screen-parked span {
-    display: block;
-    margin-bottom: 35px; }
-    @media screen and (min-width: 360px) {
-      #main-screen-parked span {
-        margin-bottom: 10px;
-        margin: 0; } }
-  #main-screen-parked span time {
+  #main-screen-parked time {
     font-size: 2em;
     color: #C01A2C;
     font-weight: bold;
@@ -199,7 +192,7 @@ body {
     background-repeat: no-repeat;
     display: inline-block; }
     @media screen and (min-width: 360px) {
-      #main-screen-parked span time {
+      #main-screen-parked time {
         padding: 0 0 0 85px;
         font-size: 3.5em;
         background-image: url("../images/img_disc_on.png");
