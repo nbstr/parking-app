@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html ng-app="app">
+<html>
 <head>
     <title>Parking</title>
 
@@ -17,17 +17,17 @@
 
 
 </head>
-<body ng-view >
+<body>
 
 <div class="wrap"  data-enhanced=”false”>
 
-    <section id="landing-page" class="" data-role="">
+    <div id="landing-page" data-role="" class="newPage">
         
         <!-- loading page -->
 
-    </section>
+    </div>
         
-    <section id="main-screen-to-park" class="" data-role="page">
+    <div id="main-screen-to-park" data-role="page" class="newPage">
         
         <h1>select parking type</h1>
 
@@ -37,13 +37,13 @@
          <div class="btn-group">
 
             <a href="" class="blueBtn" data-role="none" data-transition="flip">park here</a>
-            <a href="#report-controller" class="redBtn" data-role="none" data-transition="flip">report controller</button></a>
+            <a href="#report-controller" class="redBtn" data-role="none" data-transition="flip">report controller</a>
         </div>
 
-    </section>
+    </div>
 
 
-    <section id="park-here-meter" class="" data-role="page">
+    <div id="park-here-meter" data-role="page" class="newPage">
         
         <img src="images/img_park_on.png" alt="parking meter on" data-role="none">
 
@@ -54,22 +54,22 @@
             <button type="submit" class="blueBtn" data-role="none">confirm</button>
         </div>
 
-    </section>
+    </div>
 
-    <section id="park-here-disc" class="" data-role="page">
+    <div id="park-here-disc" data-role="page" class="newPage">
 
         <img src="images/img_disc_on.png" alt="parking disc">
 
-            <time>2:00</time>
+            <span><time>2:00</time></span> <!-- attribut datetime required otherwise not valid-->
 
         <div class="btn-group">
             <a href="#park-here-notes" class="greenBtn" data-role="none" data-transition="flip">parking notes</a>
             <button type="submit" class="blueBtn" data-role="none">confirm</button>
         </div>
 
-    </section>
+    </div>
 
-    <section id="park-here-notes" class="" data-role="page">
+    <div id="park-here-notes" data-role="page" class="newPage">
 
         <h1>notes</h1>
         <label for="notes"><textarea id="notes" name="notes" data-role="none">type your notes here...</textarea></label>
@@ -79,13 +79,13 @@
             <button class="redBtn" type="submit" data-role="none" >cancel</button>
         </div>
 
-    </section>
+    </div>
 
-    <section id="main-screen-parked" class="" data-role="page">
+    <div id="main-screen-parked" data-role="page" class="newPage">
 
         <h1>Time remaining</h1>
 
-        <span class="disc-on"><time>00:14</time></span>
+        <span><time>00:14</time></span>
 
         <div class="btn-group">
             <button type="submit" class="greenBtn" data-role="none">go</button>
@@ -94,10 +94,10 @@
             <a href="#report-controller" class="redBtn" data-role="none" data-transition="flip">report controller</a>
         </div>
 
-    </section>
+    </div>
 
 
-    <section id="report-controller" class="" data-role="page">
+    <div id="report-controller" data-role="page" class="newPage">
         <nav>
             <span><a href="" data-role="none" data-transition="flip">back</a></span>
             <span><a href="" data-role="none" data-transition="flip">cancel</a></span>
@@ -111,7 +111,7 @@
             citizen will be noticed right away !</p>
         </div>
 
-    </section>    
+    </div>    
     
 </div>
 <script src="js/parking-app.js"></script>

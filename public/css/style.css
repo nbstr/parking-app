@@ -57,18 +57,18 @@ body {
     text-transform: uppercase; }
 
 /*STYLES SHARED AMONG EACH SECTION */
-section {
+.newPage {
   margin-top: 50px;
   /*STYLING PLACERHOLDER*/ }
-  section img {
+  .newPage img {
     max-width: 30%;
     margin-bottom: 60px; }
     @media screen and (min-width: 360px) {
-      section img {
+      .newPage img {
         max-width: 40%; } }
-  section:nth-child(n+3) img {
+  .newPage:nth-child(n+3) img {
     margin: 60px 0px; }
-  section input {
+  .newPage input {
     display: block;
     margin: 0 auto;
     width: 65%;
@@ -78,41 +78,41 @@ section {
     border-top: 4px solid #b5b5b4;
     min-height: 50px; }
     @media screen and (min-width: 360px) {
-      section input {
+      .newPage input {
         font-size: 1.2em;
         width: 85%;
         min-height: 100px; } }
-  section ::-webkit-input-placeholder {
+  .newPage ::-webkit-input-placeholder {
     font-size: 2em;
     font-family: 'Lato', sans-serif;
     text-transform: uppercase;
     text-align: center; }
-  section :-moz-placeholder {
+  .newPage :-moz-placeholder {
     /* Firefox 18- */
     font-size: 2em;
     font-family: 'Lato', sans-serif;
     text-transform: uppercase;
     text-align: center; }
-  section ::-moz-placeholder {
+  .newPage ::-moz-placeholder {
     /* Firefox 19+ */
     font-size: 2em;
     font-family: 'Lato', sans-serif;
     text-transform: uppercase;
     text-align: center; }
-  section :-ms-input-placeholder {
+  .newPage :-ms-input-placeholder {
     font-size: 2em;
     font-family: 'Lato', sans-serif;
     text-transform: uppercase;
     text-align: center; }
-  section .btn-group {
+  .newPage .btn-group {
     position: absolute;
     bottom: 20px;
     left: 0;
     right: 0; }
     @media screen and (min-width: 360px) {
-      section .btn-group {
+      .newPage .btn-group {
         bottom: 40px; } }
-  section .btn-group a, section .btn-group button {
+  .newPage .btn-group a, .newPage .btn-group button {
     border: 0;
     text-decoration: none;
     font-family: 'Lato', sans-serif;
@@ -124,7 +124,7 @@ section {
     margin: 10px auto;
     line-height: 1.6em; }
     @media screen and (min-width: 360px) {
-      section .btn-group a, section .btn-group button {
+      .newPage .btn-group a, .newPage .btn-group button {
         font-size: 1.8em;
         width: 85%; } }
 
