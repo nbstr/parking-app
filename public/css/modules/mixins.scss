@@ -1,0 +1,202 @@
+@mixin webkit-box($line){
+    display: -webkit-box;
+    display: -moz-box;
+    -webkit-box-orient: vertical;
+    overflow:hidden;
+    -webkit-line-clamp: $line;
+
+}
+@mixin unselectable {
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  -o-user-select: none;
+  user-select: none;
+}
+@mixin fixed-fill{
+        position:fixed;top:0px;left:0px;bottom:0px;right:0px;width:100%;height:100%;overflow: auto;
+}
+@mixin border-radius($radius){
+    border-radius: $radius;
+    -moz-border-radius: $radius;
+    -webkit-border-radius: $radius;
+}
+@mixin blurred($radius){
+    -webkit-filter: blur($radius);
+    -moz-filter: blur($radius);
+    -o-filter: blur($radius);
+    -ms-filter: blur($radius);
+    filter: blur($radius);
+    transform: translateZ(0);
+    -webkit-backface-visibility: hidden;
+    @media only screen and (max-device-width: 1024px){
+        transform:none;
+        -webkit-backface-visibility:visible;
+    }
+}
+@mixin inline{
+    display: inline-block;
+    vertical-align: top;
+}
+@mixin inline-bottom{
+    display: inline-block;
+    vertical-align: bottom;
+}
+@mixin absoluteFill{
+    position:absolute;left:0px;right:0px;top:0px;bottom:0px;
+    width:100%;height:100%;
+    /* edit: added z-index */
+    z-index: 1;
+
+    /* edit: fixes overlap error in IE7/8, 
+     make sure you have an empty gif */
+   // background-image: url('../img/empty.gif');
+}
+@mixin box-shadow($left,$bottom,$spread,$thickness,$opacity){
+    box-shadow:$left $bottom $spread $thickness rgba(0,0,0,$opacity);
+    -webkit-box-shadow: $left $bottom $spread $thickness rgba(0,0,0,$opacity);
+}
+@mixin box-shadow-white($left,$bottom,$spread,$thickness,$opacity){
+    box-shadow:$left $bottom $spread $thickness rgba(255,255,255,$opacity);
+    -webkit-box-shadow: $left $bottom $spread $thickness rgba(255,255,255,$opacity);
+}
+@mixin line-height($size){
+    line-height:$size;
+    @media only screen and (max-width: 640px){
+        line-height:($size - 2);
+    }
+    @media only screen and (max-width: 480px){
+        line-height:($size - 4);
+    }
+    
+}
+@mixin line-height-2($size,$rapp){
+    line-height:$size;
+    @media only screen and (max-width: 640px){
+        line-height:($size - (2 * $rapp));
+    }
+    @media only screen and (max-width: 480px){
+        line-height:($size - (4 * $rapp));
+    }
+    
+}
+@mixin font-size($size){
+    font-size:$size;
+    @media only screen and (max-width: 640px){
+        font-size:($size - 2);
+    }
+    @media only screen and (max-width: 480px){
+        font-size:($size - 4);
+    }
+    
+}
+@mixin font-size-2($size,$rapp){
+    font-size:$size;
+    @media only screen and (max-width: 640px){
+        font-size:($size - (2 * $rapp));
+    }
+    @media only screen and (max-width: 480px){
+        font-size:($size - (4 * $rapp));
+    }
+    
+}
+@mixin transition-effect-delay($property,$duration,$function,$delay){
+    transition: $property $duration $function $delay;
+    -webkit-transition: $property $duration $function $delay;
+    -moz-transition: $property $duration $function $delay;
+}
+@mixin transition-effect($property,$duration,$function){
+    transition: $property $duration $function;
+    -webkit-transition: $property $duration $function;
+    -moz-transition: $property $duration $function;
+}
+@mixin transition($property,$duration){
+    transition: $property $duration;
+    -webkit-transition: $property $duration;
+    -moz-transition: $property $duration;
+}
+@mixin arrow($direction, $color, $size){
+    display: block;
+    height: 0;
+    width: 0;
+    
+    @if $direction == 'top' {
+        border-left: $size solid transparent;
+    	border-right: $size solid transparent;
+    	border-bottom: $size solid $color;
+    } @else if $direction == 'right' {
+        border-top: $size solid transparent;
+        border-bottom: $size solid transparent;
+    	border-left: $size solid $color;
+    } @else if $direction == 'bottom' {
+        border-top: $size solid $color;
+        border-right: $size solid transparent;
+        border-left: $size solid transparent;
+    } @else if $direction == 'left' {
+        border-top: $size solid transparent;
+    	border-right: $size solid $color;
+    	border-bottom: $size solid transparent;
+    } @else if $direction == 'top-left' {
+        border-top: $size solid $color; 
+        border-right: $size solid transparent;	
+    } @else if $direction == 'top-right' {
+        border-top: $size solid $color; 
+        border-left: $size solid transparent;
+    } @else if $direction == 'bottom-left' {
+        border-bottom: $size solid $color; 
+        border-right: $size solid transparent;	
+    } @else if $direction == 'bottom-right' {
+        border-bottom: $size solid $color; 
+        border-left: $size solid transparent;
+    }
+}
+@mixin main-block{
+    margin: auto;
+    @media only screen and (min-width: 769px){
+        width: 960px;
+    }
+}
+
+// COLOR PLACEHOLDER
+@mixin color-placeholder($color:#000){
+    ::-webkit-input-placeholder{color:$color;}
+    :-moz-placeholder{color:$color;}
+    ::-moz-placeholder{color:$color;}
+    :-ms-input-placeholder{color:$color;}
+}
+// DOC: @include color-placeholder($color:#000);
+
+// DROP BOX-SIZING
+@mixin box-sizing(){
+    *,*:after,*:before{
+        box-sizing:border-box;
+        -moz-box-sizing:border-box;
+    }
+}
+// DOC: @include box-sizing();
+
+
+
+@mixin borderBtn(){
+    border-radius: 10px;
+    border-left: 0;
+    border-right: 0;
+    border-top: 0;
+    border-bottom: 4px solid;
+    padding: 10px;
+    border-color: #b5b5b4;
+}
+
+@mixin whiteInput(){
+    background: white;
+    border-radius: 10px;
+    border-top: 4px solid #b5b5b4;
+    min-height: 50px;
+}
+
+@mixin inputPlaceholder(){
+    font-size: 2em;
+    font-family: 'Lato', sans-serif;
+    text-transform: uppercase;
+    text-align: center; 
+}

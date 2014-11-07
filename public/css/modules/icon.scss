@@ -1,0 +1,28 @@
+/*
+General icons scss
+*/
+@mixin inline-block{
+    display:inline-block;
+    vertical-align:top;
+}
+/*
+Mixin for the sprites
+*/
+$sprite-width:305px;
+$sprite-height:244px;
+@mixin dimensionPosition($posX,$posY,$height,$width,$rapp){
+    background-size:ceil($sprite-width * $rapp) ceil($sprite-height * $rapp);
+    background-position: ceil($rapp * $posX) ceil($rapp * $posY);
+    height: ceil($height * $rapp);
+    width: ceil($width * $rapp);
+}
+/*
+Mixin used to get a logo from a file
+*/
+@mixin backgroundIcon($url,$width,$height,$rapp){
+    background-image: url($url);
+    background-repeat: no-repeat;
+    background-size:ceil($width * $rapp) ceil($height * $rapp);
+    height: ceil($height * $rapp);
+    width: ceil($width * $rapp);
+}

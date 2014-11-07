@@ -7,9 +7,10 @@
     <meta name="viewport" content="width=device-width, maximum-scale=1.0, user-scalable=no" />
 
     <!-- JQUERY -->
-    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.0-beta.1/jquery.mobile-1.3.0-beta.1.min.css" />
-    <script src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
-    <script src="http://code.jquery.com/mobile/1.3.0-beta.1/jquery.mobile-1.3.0-beta.1.min.js"></script>   
+    <link rel="stylesheet" href="lib/jquery.mobile-1.4.5.css" />
+    <script src="lib/jquery-2.1.1.min.js"></script>
+    <script src="lib/jquery.mobile-1.4.5.min.js"></script>   
+    <script src="lib/jquery.mobile-1.4.5.min.map"></script>   
 
     <!-- GLOBAL CSS -->
     <link href='http://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
@@ -35,63 +36,74 @@
         <img class="disc_off" src="images/img_disc_off.png" alt="disc off">
 
          <div class="btn-group">
-
-            <a href="" class="blueBtn" data-role="none" data-transition="flip">park here</a>
-            <a href="#report-controller" class="redBtn" data-role="none" data-transition="flip">report controller</a>
+            <div class="blueBtn link">park here<a href=""  data-role="none" data-transition="flip"></a></div>
+            <div class="redBtn link">report controller<a href="#report-controller" data-role="none" data-transition="flip"></a></div>
         </div>
 
     </div>
 
 
     <div id="park-here-meter" data-role="page" class="newPage">
+        <nav>
+            <span><a href="javascript:history.back()" data-role="none" data-transition="flip">back</a></span>
+        </nav>
         
         <img src="images/img_park_on.png" alt="parking meter on" data-role="none">
 
-        <label for="time"><input type="text" name="time" id="time" placeholder="enter time" data-role="none"/></label>
+        <label for="time"><input type="time" name="time" id="time" data-role="none" /></label>
 
         <div class="btn-group">
-            <a  href="#park-here-notes" class="greenBtn" data-role="none" data-transition="flip">parking notes</a>
-            <button type="submit" class="blueBtn" data-role="none">confirm</button>
+            <div class="greenBtn link">parking notes<a href="#park-here-notes" data-role="none" data-transition="flip"></a></div>
+            <div class="blueBtn link" onclick="parkCount()">confirm<a href="#main-screen-parked" data-role="none" data-transition="flip"></a></div>
         </div>
 
     </div>
 
     <div id="park-here-disc" data-role="page" class="newPage">
+        <nav>
+            <span><a href="javascript:history.back()" data-role="none" data-transition="flip">back</a></span>
+        </nav>
 
-        <img src="images/img_disc_on.png" alt="parking disc">
+        <img src="images/img_disc_on.png" alt="parking disc" >
 
             <time datetime="02:00">2:00</time>
 
         <div class="btn-group">
-            <a href="#park-here-notes" class="greenBtn" data-role="none" data-transition="flip">parking notes</a>
-            <button type="submit" class="blueBtn" data-role="none">confirm</button>
+            <div class="greenBtn link"><a href="#park-here-notes" data-role="none" data-transition="flip"></a>parking notes</div>
+            <div class="blueBtn link" onclick="timer(120,1000)">confirm<a href="#main-screen-parked" data-role="none" data-transition="flip"></a></div>
         </div>
 
     </div>
 
     <div id="park-here-notes" data-role="page" class="newPage">
+        <nav>
+            <span><a href="javascript:history.back()" data-role="none" data-transition="flip">back</a></span>
+        </nav>
 
         <h1>notes</h1>
-        <label for="notes"><textarea id="notes" name="notes" data-role="none">type your notes here...</textarea></label>
+        <label for="notes"><textarea id="notes" name="notes" data-role="none" placeholder="type your notes here..."></textarea></label>
 
         <div class="btn-group">
-            <button class="greenBtn" type="submit" data-role="none">save</button>
-            <button class="redBtn" type="submit" data-role="none" >cancel</button>
+            <div class="greenBtn link">save</div>
+            <div class="redBtn link">cancel</div>
         </div>
 
     </div>
 
     <div id="main-screen-parked" data-role="page" class="newPage">
+        <nav>
+            <span><a href="javascript:history.back()" data-role="none" data-transition="flip">back</a></span>
+        </nav>
 
         <h1>Time remaining</h1>
 
-        <time datetime="00:14">00:14</time> <!--Attribut datetime here should constantly be updated while time is reducing-->
+        <time class="daTime" datetime="00:00">00:00</time>
 
         <div class="btn-group">
-            <button type="submit" class="greenBtn" data-role="none">go</button>
-            <a href="#" class="blueBtn" data-role="none">+ extend stay</a>
-            <a href="google.com" class="lightBlueBtn" data-role="none">dude, where is my car ?</a>
-            <a href="#report-controller" class="redBtn" data-role="none" data-transition="flip">report controller</a>
+            <div class="greenBtn link" onclick="resetCount()">go</div>
+            <div class="blueBtn link" onclick="extendCount()">extend stay<a href="#" data-role="none"></a></div>
+            <div class="lightBlueBtn link">dude, where's my car ?<a href="google.com" data-role="none"></a></div>
+            <div class="redBtn link">report controller<a href="#report-controller" data-role="none" data-transition="flip"></a></div>
         </div>
 
     </div>
@@ -99,8 +111,8 @@
 
     <div id="report-controller" data-role="page" class="newPage">
         <nav>
-            <span><a href="" data-role="none" data-transition="flip">back</a></span>
-            <span><a href="" data-role="none" data-transition="flip">cancel</a></span>
+            <span><a href="javascript:history.back()" data-role="none" data-transition="flip">back</a></span>
+            <span><a href="javascript:history.back()" data-role="none" data-transition="flip">cancel</a></span>
         </nav>
 
         <img src="images/whistle.png" alt="red whistle report controller">
@@ -108,7 +120,7 @@
         <div class="thank-you">
             <h1>thank you </h1>
             <p>We thank you very much for reporting the controllers. All your fellow
-            citizen will be noticed right away !</p>
+            citizens will be notified right away !</p>
         </div>
 
     </div>    

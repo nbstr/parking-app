@@ -1,0 +1,15 @@
+/*MAIN SCREEN_TO_PARK*/
+
+#main-screen-to-park{
+
+    .warning{
+        display:inline-block;
+        margin-bottom:10px;
+
+        @media screen and (min-width: 360px){
+            font-size:1.4em;
+            margin-bottom:30px;
+        }
+    }
+
+}

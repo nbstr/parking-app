@@ -1,0 +1,76 @@
+/*
+General colors (here is an example)
+*/
+$light-orange:rgb(249,143,115);
+$light-orange-active:rgb(224,128,100);
+$orange:rgb(210,85,44);
+$orange-active:rgb(195,70,29);
+$bruin:rgb(98,46,15);
+$bruin-active:rgb(83,31,0);
+$turquoise:rgb(75,162,154);
+$turquoise-active:rgb(60,147,139);
+$greyBorder:rgb(210,210,210);
+$grey:rgb(210,210,210);
+$light-grey:rgb(240,240,240);
+$light-grey-active:rgb(225,225,225);
+.grey{
+    color:black;
+    color:$grey;
+}
+.back-grey{
+    background-color: $grey;
+}
+.back-grey:active{
+    background-color: rgb(195,195,195);
+}
+.orange{
+    color:$orange;
+}
+.back-orange{
+    color:white;
+    background-color: $orange;
+}
+.back-orange:active{
+    background-color: $orange-active;
+}
+.bruin{
+    color:$bruin;
+}
+.back-bruin{
+    color:white;
+    background-color: $bruin;
+}
+.back-bruin:active{
+    background-color: $bruin-active;
+}
+.turquoise{
+    color:$turquoise;
+}
+.back-turquoise{
+    color:white;
+    background-color: $turquoise;
+}
+.back-turquoise:active{
+    background-color: $turquoise-active;
+}
+.light-orange{
+    color:white;
+    color:$light-orange;
+}
+.back-light-orange{
+    color:white;
+    background-color: $light-orange;
+}
+.back-light-orange:active{
+    background-color: $light-orange-active;
+}
+.back-light-grey{
+    color:black;
+    background-color: $light-grey;
+}
+.back-light-grey:active{
+    background-color: $light-grey-active;
+}
+.light-grey{
+    color:$light-grey;
+}
