@@ -52,6 +52,11 @@
      make sure you have an empty gif */
    // background-image: url('../img/empty.gif');
 }
+@mixin text-shadow($left,$bottom,$spread,$thickness,$opacity){
+    text-shadow:$left $bottom $spread $thickness rgba(0,0,0,$opacity);
+    -webkit-text-shadow: $left $bottom $spread $thickness rgba(0,0,0,$opacity);
+}
+
 @mixin box-shadow($left,$bottom,$spread,$thickness,$opacity){
     box-shadow:$left $bottom $spread $thickness rgba(0,0,0,$opacity);
     -webkit-box-shadow: $left $bottom $spread $thickness rgba(0,0,0,$opacity);
@@ -195,7 +200,7 @@
 }
 
 @mixin inputPlaceholder(){
-    font-size: 2em;
+    font-size: 1em;
     font-family: 'Lato', sans-serif;
     text-transform: uppercase;
     text-align: center; 

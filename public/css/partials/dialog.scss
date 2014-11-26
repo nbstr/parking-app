@@ -1,0 +1,30 @@
+.dialog{
+    z-index:1000000;
+    display:none;
+    overflow: hidden;
+    overflow-y: auto;
+    @include fixed-fill;
+    font-family: $font,'Roboto','Helvetica', sans-serif;
+    .background{
+        @include fixed-fill;
+        background-color: rgba(0,0,0,0.45);
+        transform: translateZ(0);
+        -webkit-backface-visibility: hidden;
+    }
+    .section{
+        z-index: 99999999;
+        position:relative;
+        display:none;
+        text-align: center;
+        margin:$default_margin auto;
+        width: 100% - 2 * $default_margin;
+        margin-bottom: (72/640) * 100%;
+        background-color: white;
+        padding: 20px;
+        @include font-size-2(30px,2);
+
+        @media only screen and (min-width: 640px){
+            width: 35%;
+        }
+    }
+}

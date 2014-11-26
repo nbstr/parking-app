@@ -482,8 +482,8 @@ body {
     color: rgba(0, 0, 0, 0.6);
     text-transform: uppercase;
     font-size: 1.2em;
-    margin-top: 80px;
-    margin-bottom: 40px;
+    margin-top: 20px;
+    margin-bottom: 20px;
     font-weight: 900; }
     @media screen and (min-width: 360px) {
       body h1 {
@@ -526,6 +526,17 @@ body {
     background-color: #18ae60;
     border-color: #246e36;
     text-transform: uppercase; }
+  body .lightGreenBtn {
+    border-radius: 10px;
+    border-left: 0;
+    border-right: 0;
+    border-top: 0;
+    border-bottom: 4px solid;
+    padding: 10px;
+    border-color: #b5b5b4;
+    background-color: #2ECC71;
+    border-color: #27AE60;
+    text-transform: uppercase; }
   body .lightBlueBtn {
     border-radius: 10px;
     border-left: 0;
@@ -542,13 +553,11 @@ body {
 .newPage {
   /*STYLING PLACERHOLDER*/ }
   .newPage img {
-    max-width: 30%;
-    margin-bottom: 60px; }
-    @media screen and (min-width: 360px) {
-      .newPage img {
-        max-width: 40%; } }
+    max-width: 40%;
+    margin-bottom: 50px;
+    margin-top: 25px; }
   .newPage:nth-child(n+3) img {
-    margin: 60px 0px; }
+    margin: 80px 0px 40px; }
   .newPage input {
     display: block;
     margin: 0 auto;
@@ -567,29 +576,29 @@ body {
         min-height: 100px;
         line-height: 100px; } }
   .newPage ::-webkit-input-placeholder {
-    font-size: 2em;
+    font-size: 1em;
     font-family: 'Lato', sans-serif;
     text-transform: uppercase;
     text-align: center; }
   .newPage :-moz-placeholder {
     /* Firefox 18- */
-    font-size: 2em;
+    font-size: 1em;
     font-family: 'Lato', sans-serif;
     text-transform: uppercase;
     text-align: center; }
   .newPage ::-moz-placeholder {
     /* Firefox 19+ */
-    font-size: 2em;
+    font-size: 1em;
     font-family: 'Lato', sans-serif;
     text-transform: uppercase;
     text-align: center; }
   .newPage :-ms-input-placeholder {
-    font-size: 2em;
+    font-size: 1em;
     font-family: 'Lato', sans-serif;
     text-transform: uppercase;
     text-align: center; }
   .newPage .btn-group {
-    position: absolute;
+    position: relative;
     bottom: 20px;
     left: 0;
     right: 0; }
@@ -612,21 +621,32 @@ nav {
   position: fixed;
   top: 0;
   display: block;
+  height: 40px;
   width: 100%;
   color: rgba(0, 0, 0, 0.6);
+  background-color: rgba(245, 245, 245, 0.6);
   font-weight: bold;
-  font-size: 1.1em; }
+  font-size: 1.1em;
+  z-index: 10;
+  text-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.5);
+  -webkit-text-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.5); }
   @media screen and (min-width: 360px) {
     nav {
       font-size: 1.3em; } }
   nav span:first-child {
     position: absolute;
-    top: 20px;
+    top: 7px;
     left: 20px; }
   nav span:nth-child(2) {
     position: absolute;
-    top: 20px;
+    top: 7px;
     right: 20px; }
+
+/*MAP*/
+html, body, #map_canvas {
+  height: 100%;
+  margin: 0;
+  padding: 0; }
 
 *, *:after, *:before {
   -webkit-box-sizing: border-box;
@@ -713,16 +733,34 @@ input {
     .screen-active-inline {
       display: none; } }
 
+.content {
+  margin-top: 20px; }
+
+#content {
+  padding: 0 !important;
+  position: absolute !important;
+  top: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  left: 0 !important; }
+
+.my-gmaps {
+  position: absolute;
+  display: inline-block;
+  background-image: url("../images/map.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  width: 3em;
+  height: 3em;
+  bottom: 15px;
+  right: 10px; }
+
 /* #MAIN SCREEN PARKED */
 #main-screen-parked {
   margin: 0; }
   #main-screen-parked h1 {
-    padding: 0;
-    margin: 15px 0;
-    margin-top: 35px; }
-    @media screen and (min-width: 360px) {
-      #main-screen-parked h1 {
-        margin-bottom: 25px; } }
+    padding: 0; }
   #main-screen-parked time {
     font-size: 2em;
     color: #C01A2C;
@@ -736,7 +774,7 @@ input {
     @media screen and (min-width: 360px) {
       #main-screen-parked time {
         padding: 0 0 0 85px;
-        font-size: 3.5em;
+        font-size: 2.5em;
         background-image: url("../images/img_disc_on.png");
         background-size: 80px;
         margin-bottom: 25px; } }
@@ -753,21 +791,29 @@ input {
       margin-bottom: 30px; } }
 
 /* #PARK HERE DISC*/
-#park-here-disc time {
+#park-here-disc time,
+#park-here-meter time {
   display: block;
   font-size: 2.5em;
   text-align: center;
   font-weight: bold;
-  font-family: 'Lato', sans-serif; }
+  font-family: 'Lato', sans-serif;
+  margin-bottom: 50px;
+  margin-top: -15px; }
   @media screen and (min-width: 360px) {
-    #park-here-disc time {
+    #park-here-disc time,
+    #park-here-meter time {
       font-size: 3em; } }
+#park-here-disc label[for="time"],
+#park-here-meter label[for="time"] {
+  margin-bottom: 50px; }
 
 /* #PARK HERE NOTES */
+#park-here-notes .content {
+  padding: 1em; }
 #park-here-notes h1 {
   font-family: 'Lato' sans-serif;
-  font-size: 2.0em;
-  margin-top: 10px; }
+  font-size: 1.2em; }
   @media screen and (min-width: 360px) {
     #park-here-notes h1 {
       font-size: 2.5em; } }
@@ -777,16 +823,19 @@ input {
   border-radius: 10px;
   border-top: 4px solid #b5b5b4;
   min-height: 50px;
-  width: 70%;
-  min-height: 180px;
+  width: 65%;
   font-family: 'Lato', sans-serif;
   text-transform: uppercase;
+  font-size: 20px;
   color: rgba(0, 0, 0, 0.6);
-  padding: 5px; }
+  padding: 5px;
+  margin-bottom: 20px; }
   @media screen and (min-width: 360px) {
     #park-here-notes textarea {
-      min-height: 280px;
+      width: 85%;
       padding: 15px; } }
+#park-here-notes .alsuite {
+  position: relative; }
 
 /* #REPORT-CONTROLLER */
 #report-controller img {
@@ -824,6 +873,81 @@ input {
     text-align: center;
     font-weight: bold;
     padding-top: 10px; }
+
+.dialog {
+  z-index: 1000000;
+  display: none;
+  overflow: hidden;
+  overflow-y: auto;
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  bottom: 0px;
+  right: 0px;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  font-family: "Lato", "Roboto", "Helvetica", sans-serif; }
+  .dialog .background {
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    bottom: 0px;
+    right: 0px;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.45);
+    transform: translateZ(0);
+    -webkit-backface-visibility: hidden; }
+  .dialog .section {
+    z-index: 99999999;
+    position: relative;
+    display: none;
+    text-align: center;
+    margin: 8.125% auto;
+    width: 83.75%;
+    margin-bottom: 11.25%;
+    background-color: white;
+    padding: 20px;
+    font-size: 30px; }
+    @media only screen and (max-width: 640px) {
+      .dialog .section {
+        font-size: 26px; } }
+    @media only screen and (max-width: 480px) {
+      .dialog .section {
+        font-size: 22px; } }
+    @media only screen and (min-width: 640px) {
+      .dialog .section {
+        width: 35%; } }
+
+.dialog-delete .section {
+  position: absolute;
+  margin-left: auto;
+  margin-right: auto;
+  top: -800px;
+  left: 0;
+  right: 0;
+  transition: all 0.7s;
+  -webkit-transition: all 0.7s;
+  -moz-transition: all 0.7s;
+  border-radius: 10px; }
+  .dialog-delete .section .yn {
+    font-size: 0; }
+  .dialog-delete .section .no,
+  .dialog-delete .section .yes {
+    display: inline-block;
+    width: 47%;
+    font-size: 20px;
+    color: white;
+    padding: 9px 10px 8px;
+    margin-right: 6%; }
+  .dialog-delete .section .yes {
+    margin-right: 0; }
+  .dialog-delete .section h1 {
+    font-family: "Lato", "Roboto", "Helvetica", sans-serif;
+    font-size: 18px;
+    margin: 30px 0; }
 
 /*
 General icons scss

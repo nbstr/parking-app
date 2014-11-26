@@ -67,7 +67,7 @@ var timerBusy = false,
  
 function timer(count,interval){
     //interval is in milliseconds
-    if (!timerBusy){
+    //if (!timerBusy){
         timerBusy = true;
         clearInterval();
         cpt = count;
@@ -76,7 +76,7 @@ function timer(count,interval){
                 t = setInterval(function(){
                     if(cpt>0){
                         cpt = cpt -1;
-                        console.log(cpt);
+                        //console.log(cpt);
                         if(cpt>=60){
                             var x = 60,
                                 y = cpt,
@@ -97,9 +97,9 @@ function timer(count,interval){
         } else {
             console.log("count and interval must be >0");
         }
-    } else {
-        console.log("timer is already busy");
-    }
+//    } else {
+//        console.log("timer is already busy");
+//    }
 }
 
 /* Get an input value and put it in the timer */
@@ -122,11 +122,95 @@ function resetCount(){
     return;
 }
 
-function extendCount(){
-    cpt=cpt+15;
+function extendCount(xtra){
+    cpt=xtra;
     window.clearInterval(t);
     timerBusy = false;
     console.log(timerBusy);
     timer(cpt,1000);
     return;
+}
+
+function apparitionDown(elem,time,enableLock,fn){
+    time = time ? time : 600;
+    /*
+    useless now since the body is fixed
+    //disableScroll();
+    */
+    $(elem).fadeIn(time);
+    $(elem).find(".background").fadeIn(time);
+    $(elem).find(".section").fadeIn(time);
+    $(elem).find(".section").css('top','0');
+}
+function disparitionUp(elem,time){
+    time = time ? time : 600;
+    //if(isIE()<=9){
+    //}
+    $(elem).find(".background").fadeOut(time);
+    $(elem).find(".section").fadeOut(time);
+    $(elem).find(".section").css('top','-800px');
+    $(elem).fadeOut(time);
+    //console.log("DISPARTION: "+elem);
+}
+
+var geocoder;
+
+function geoCode(adr){
+    console.log(adr);
+    if(window.deviceName && window.deviceName.toLowerCase()=="android"){
+        geocoder = new google.maps.Geocoder();
+        geocoder.geocode({
+            'address': adr
+        }, function(results, status) {
+
+            if (status == google.maps.GeocoderStatus.OK) {
+
+                console.log(results);
+                console.log(results[0].geometry.location.B);
+                console.log(results[0].geometry.location.k);
+                var long = results[0].geometry.location.B, 
+                    lat = results[0].geometry.location.k;
+                window.location.href="geo:"+lat+","+long+"?z=14&q="+adr;
+            }else {
+                alert("geo didnt work");
+            }
+        });
+    }
+    else{
+        //window.open("maps://maps.apple.com/?q="+lat+","+long);
+        window.location.href="maps:q="+adr;
+    }
+
+}
+
+function codeLatLng(lat,lng) {
+    console.log("entered codelatlng");
+    console.log(lat + " " + lng);
+    var latlng = new google.maps.LatLng(lat, lng);
+    console.log(latlng);
+    geocoder = new google.maps.Geocoder();
+    geocoder.geocode({'latLng': latlng}, function(results, status) {
+        if (status == google.maps.GeocoderStatus.OK) {
+            console.log("GeocoderStatus.OK");
+            if (results[0]) {
+                window.cll=results[0];
+                geoCode(results[0].formatted_address);
+            } else {
+                alert('No results found');
+            }
+        } else {
+            alert('Geocoder failed due to: ' + status);
+        }
+    });
+}
+
+function focusText(){
+//    $('#park-here-notes').find('.redBtn').fadeOut();
+    $('#park-here-notes').find('nav').fadeOut();
+}
+
+
+function blurText(){
+//    $('#park-here-notes').find('.redBtn').fadeIn();
+    $('#park-here-notes').find('nav').fadeIn();
 }
