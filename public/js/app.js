@@ -297,9 +297,28 @@ angular.module('app', [])
         console.log("dicovery finished with success");
         console.log("map:");
         console.log($rootScope.devicesMap);
+        $rootScope.bluetoothPair();
     }
     
 
+    $rootScope.bluetoothPair = function(){
+        //atm we know device, how will we know which mac adresses are buzzers?
+        //
+        CordovaService.ready.then(function() {
+            for (var key in $rootScope.devicesMap) {
+                //alert("key : " + key + " value : " + myMap[key]);
+                if ($rootScope.devicesMap[key]=="98:D3:31:90:13:D5"){
+                    window.bluetooth.pair($rootScope.onPairSuccess,$rootScope.onError,$rootScope.devicesMap[key]);
+                }
+            }
+        });
+    }
+    
+    $rootScope.onPairSuccess = function(a){
+        console.log("Pair sucessfull");
+        console.log(a);
+    }
+    
     /*Read / Write/ Load logic*/
     $rootScope.loadLastCurrentData=function(){
         //load currentData from a file written somewhere on the phone 
