@@ -75,6 +75,15 @@
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0
 		},
+	"\/public\/css\/css\/map.css": {
+		"fileType": 16,
+		"ignore": 1,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/public\/css\/css\/map.css",
+		"outputAbbreviatedPath": "No Output Path",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0
+		},
 	"\/public\/css\/css\/report-controller.css": {
 		"fileType": 16,
 		"ignore": 1,
@@ -260,6 +269,22 @@
 		"shouldRunBless": 0,
 		"useLibsass": 0
 		},
+	"\/public\/css\/partials\/map.scss": {
+		"createSourceMap": 0,
+		"debugStyle": 0,
+		"decimalPrecision": 10,
+		"fileType": 4,
+		"ignore": 1,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/public\/css\/partials\/map.scss",
+		"outputAbbreviatedPath": "\/public\/css\/css\/map.css",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"outputStyle": 0,
+		"shouldRunAutoprefixer": 0,
+		"shouldRunBless": 0,
+		"useLibsass": 0
+		},
 	"\/public\/css\/partials\/park-here-disc.scss": {
 		"createSourceMap": 0,
 		"debugStyle": 0,
@@ -373,6 +398,17 @@
 		"initialSize": 10875,
 		"inputAbbreviatedPath": "\/public\/images\/img_park_on.png",
 		"outputAbbreviatedPath": "\/public\/images\/img_park_on.png",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"processed": 0
+		},
+	"\/public\/images\/map.png": {
+		"fileType": 32768,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"initialSize": 37835,
+		"inputAbbreviatedPath": "\/public\/images\/map.png",
+		"outputAbbreviatedPath": "\/public\/images\/map.png",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"processed": 0

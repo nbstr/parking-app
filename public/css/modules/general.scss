@@ -161,11 +161,11 @@ nav{
     height: 40px;
     width:100%;
     color: $titleColor;
-    background-color: rgba(245,245,245,0.6);
+    background-color: rgba(248,248,248,0.6);
     font-weight:bold;
     font-size:1.1em;
     z-index: 10;
-    @include text-shadow(1px,1px,1px,1px,0.5);
+    //@include text-shadow(1px,1px,1px,1px,0.5);
 
     @media screen and (min-width: 360px){
         font-size:1.3em;
@@ -182,7 +182,7 @@ nav{
     span:first-child{
 
         position:absolute;
-        top:7px;
+        top:8px;
         left:20px;
         
 //        >a{
@@ -192,7 +192,7 @@ nav{
 
     span:nth-child(2){
         position:absolute;
-        top:7px;
+        top:8px;
         right:20px;
 //        >a{
 //            background-color: rgba(255,255,255,0.8);
@@ -298,17 +298,4 @@ input{
     right : 0 !important; 
     bottom : 0 !important;  
     left : 0 !important;     
-}
-
-.my-gmaps{
-    position: absolute;
-    display: inline-block;
-    background-image: url('../images/map.png');
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center;
-    width: 3em;
-    height: 3em;
-    bottom: 15px;
-    right: 10px;
 }

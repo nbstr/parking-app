@@ -26,6 +26,11 @@
     <!--  Phonegap  -->
     <script type="text/javascript" src="js/config.js"></script>
     <script type="text/javascript" src="../cordova.js"></script>
+    
+    <!--  blue  -->
+<!--    <script type="text/javascript" src="js/bluetooth.js"></script>-->
+    
+    
 
 
 </head>
@@ -167,6 +172,9 @@
                 <span><a href="#main-screen-parked" data-role="none" data-transition="flip">back</a></span>
     <!--            <span><a href="javascript:history.back()" data-role="none" data-transition="flip">cancel</a></span>-->
             </nav>
+            <div class="offline" ng-hide="online">
+                Can't find a network!
+            </div>
             <div data-role="content" id="content">
                 <div id="map_canvas"></div>
                 <span class="my-gmaps link" ng-click="goToCar()"></span>
@@ -184,7 +192,7 @@
             </div>
             <div class="yn">
                 <div class="redBtn no link" onclick="disparitionUp('.dialog-back')">No</div>
-                <div class="blueBtn yes link" onclick="disparitionUp('.dialog-back');resetCount();"><a href="javascript:history.back()" data-role="none" data-transition="flip"></a>yes</div>
+                <div class="blueBtn yes link" onclick="disparitionUp('.dialog-back');clearGPS();resetCount();"><a href="javascript:history.back()" data-role="none" data-transition="flip"></a>yes</div>
             </div>
         </div>
     </div>
@@ -198,7 +206,7 @@
             </div>
             <div class="yn">
                 <div class="redBtn no link" onclick="disparitionUp('.dialog-home')">No</div>
-                <div class="blueBtn yes link" onclick="disparitionUp('.dialog-home');resetCount();"><a href="#main-screen-to-park" data-role="none" data-transition="flip"></a>yes</div>
+                <div class="blueBtn yes link" onclick="disparitionUp('.dialog-home');clearGPS();resetCount();"><a href="#main-screen-to-park" data-role="none" data-transition="flip"></a>yes</div>
             </div>
         </div>
     </div>
@@ -210,8 +218,8 @@
                 <h1>Good?</h1>
             </div>
             <div class="yn">
-                <div class="redBtn no link" ng-click="disparitionUp('.dialog-geo');getPositionAgain()">No</div>
-                <div class="blueBtn yes link" onclick="disparitionUp('.dialog-geo')">yes</div>
+                <div class="redBtn no link" ng-click="disparitionUp('.dialog-geo');getPositionAgain();">No</div>
+                <div class="blueBtn yes link" ng-click="disparitionUp('.dialog-geo');clearGPS();">yes</div>
             </div>
         </div>
     </div>

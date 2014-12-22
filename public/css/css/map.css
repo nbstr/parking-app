@@ -1,0 +1,21 @@
+.my-gmaps {
+  position: absolute;
+  display: inline-block;
+  background-image: url("../images/map.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  width: 3em;
+  height: 3em;
+  bottom: 15px;
+  right: 10px; }
+
+.offline {
+  position: absolute;
+  color: white;
+  background-color: rgba(0, 0, 0, 0.5);
+  font-size: 36px;
+  top: 38%;
+  z-index: 20000000;
+  vertical-align: middle;
+  width: 100%; }

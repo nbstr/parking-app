@@ -624,22 +624,20 @@ nav {
   height: 40px;
   width: 100%;
   color: rgba(0, 0, 0, 0.6);
-  background-color: rgba(245, 245, 245, 0.6);
+  background-color: rgba(248, 248, 248, 0.6);
   font-weight: bold;
   font-size: 1.1em;
-  z-index: 10;
-  text-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.5);
-  -webkit-text-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.5); }
+  z-index: 10; }
   @media screen and (min-width: 360px) {
     nav {
       font-size: 1.3em; } }
   nav span:first-child {
     position: absolute;
-    top: 7px;
+    top: 8px;
     left: 20px; }
   nav span:nth-child(2) {
     position: absolute;
-    top: 7px;
+    top: 8px;
     right: 20px; }
 
 /*MAP*/
@@ -743,18 +741,6 @@ input {
   right: 0 !important;
   bottom: 0 !important;
   left: 0 !important; }
-
-.my-gmaps {
-  position: absolute;
-  display: inline-block;
-  background-image: url("../images/map.png");
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center;
-  width: 3em;
-  height: 3em;
-  bottom: 15px;
-  right: 10px; }
 
 /* #MAIN SCREEN PARKED */
 #main-screen-parked {
@@ -873,6 +859,28 @@ input {
     text-align: center;
     font-weight: bold;
     padding-top: 10px; }
+
+.my-gmaps {
+  position: absolute;
+  display: inline-block;
+  background-image: url("../images/map.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  width: 3em;
+  height: 3em;
+  bottom: 15px;
+  right: 10px; }
+
+.offline {
+  position: absolute;
+  color: white;
+  background-color: rgba(0, 0, 0, 0.5);
+  font-size: 36px;
+  top: 38%;
+  z-index: 20000000;
+  vertical-align: middle;
+  width: 100%; }
 
 .dialog {
   z-index: 1000000;
