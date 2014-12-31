@@ -11,5 +11,25 @@
             margin-bottom:30px;
         }
     }
+    
+    .min20{
+        margin-top: -20px;
+    }
+    
+    .greyed{
+        //opacity: 0.5;
+    }
+    
+    img{
+        //@include box-shadow(0px, 0px, 2px, 0px, 0.5);
+    }
+    
+    .imgTop{
+        margin-bottom: 0;
+    }
+    
+    .imgBottom{
+        margin-top: 0;
+    }
 
 }

@@ -6,14 +6,15 @@
 $(document).on('pageinit',function(){
 
 	var $redirection,
-	$warning = '<span class="warning">Please select a type!</span>',
+//	$warning = '<span class="warning">Please select a type!</span>',
 	$valueParkHere = $("#main-screen-to-park .btn-group div:first-child"),
 	$discParking = $('.disc_off'),
 	$meterParking =$('.meter_off');
+    $('.greyed').css('opacity','0.5');
 
 	/* START reinit with default values in case user goes back on #main-screen-to-park page*/
 
-	$("#main-screen-to-park .btn-group .warning").remove();
+//	$("#main-screen-to-park .btn-group .warning").remove();
 	$($valueParkHere).children().attr("href","");
 	$($discParking).attr("src","images/img_disc_off.png");
 	$($meterParking).attr("src","images/img_park_off.png");
@@ -23,26 +24,28 @@ $(document).on('pageinit',function(){
 
 	$($meterParking).on("tap",function(){
 
-		$("#main-screen-to-park .btn-group .warning").remove();
+//		$("#main-screen-to-park .btn-group .warning").remove();
 		$(this).attr("src","images/img_park_on.png");
 		$(this).attr("alt","meter on");
 		$($discParking).attr("src","images/img_disc_off.png");
 		$($discParking).attr("alt","disc off");
 		$redirection = "#park-here-meter";
         $($valueParkHere).children().attr("href",$redirection);
+        $('.greyed').css('opacity','1.0');
 //        location.href=$redirection;
 		console.log("tapped");
 	});
 
 	$($discParking).on("tap",function(){
 
-		$("#main-screen-to-park .btn-group .warning").remove();
+//		$("#main-screen-to-park .btn-group .warning").remove();
 		$(this).attr("src","images/img_disc_on.png");
 		$(this).attr("alt","disc on");
 		$($meterParking).attr("alt","meter off");
 		$($meterParking).attr("src","images/img_park_off.png");
 		$redirection ="#park-here-disc";
         $($valueParkHere).children().attr("href",$redirection);
+        $('.greyed').css('opacity','1.0');
 		
 	});
 
@@ -50,9 +53,9 @@ $(document).on('pageinit',function(){
 
 		if($(this).children().attr("href")==""){
 			$("#main-screen-to-park .btn-group span").remove();
-			$("#main-screen-to-park .btn-group").prepend($warning).find("span").hide().fadeIn("slow");
+//			$("#main-screen-to-park .btn-group").prepend($warning).find("span").hide().fadeIn("slow");
 		}else{
-			$("#main-screen-to-park .btn-group .warning").remove();
+//			$("#main-screen-to-park .btn-group .warning").remove();
 		}
 	});
 
@@ -102,17 +105,7 @@ function timer(count,interval){
 //    }
 }
 
-/* Get an input value and put it in the timer */
 
-function parkCount(){
-    var theTime = $("input[type='time']").val(),
-        timeArray = $("input[type='time']").val().split(":"),
-        h = parseInt(timeArray[0]),
-        m = parseInt(timeArray[1]),
-        tot = h*60+m;
-
-    timer(tot,1000);
-}
 
 function resetCount(){
     window.clearInterval(t);

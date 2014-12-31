@@ -48,16 +48,100 @@ angular.module('app', [])
     
     $rootScope.geoFinished = false;
     
-    $rootScope.reallyTime = function() {
-        parkCount();
-        $rootScope.geoFinished = false;
-        $rootScope.getPosition();
-    };
+//    $rootScope.reallyTime = function() {
+//        parkCount();
+//        $rootScope.geoFinished = false;
+//        $rootScope.getPosition();
+//    };
     
-    $rootScope.reallyTimer = function(a,b) {
-        timer(a,b);
+    /* Get an input value and put it in the timer */
+    
+    var compareImputs = function(){
+        if ($("input[name='timeStartParkMeter']").val()!="" && $("input[name='timeEndParkMeter']").val()!=""){
+            return [$("input[name='timeStartParkMeter']").val(),$("input[name='timeEndParkMeter']").val()];
+        } else if($("input[name='timeStartBlue']").val()!="") {
+            return $("input[name='timeStartBlue']").val();
+        } else {
+            return ("sry");
+        }
+    }
+    
+    var resetInputs = function(){
+        $("input[name='timeStartParkMeter']").val("");
+        $("input[name='timeEndParkMeter']").val("");
+        $("input[name='timeStartBlue']").val("");
+    }
+    
+    var getTotMins = function(h,m){
+        var hh = parseInt(h),
+            mm = parseInt(m);
+        //console.log(hh);
+        //console.log(mm);
+        return (hh*60)+mm;
+    }
+    
+    var getTimeDiff = function(tot1,tot2){
+        if (tot1>tot2){
+            return tot1-tot2;
+        } else {
+//            console.log(tot2-tot1);
+//            console.log((24*60)-(tot2-tot1));
+            return (24*60)-(tot2-tot1);
+        }
+    }
+    
+//    $rootScope.plus15 = function(){
+//        console.log("plus15");
+//        var tmp = $("input[name='timeStartParkMeter']").val();
+//        var d = new Date(tmp);
+//        console.log("dddddd");
+//        console.log(d);
+////        var split = $("input[name='timeStartParkMeter']").val().split(':');
+////        console.log();
+//        $("input[name='timeEndParkMeter']").val($("input[name='timeStartParkMeter']").val());
+//    }
+
+    $rootScope.parkCount= function(count){
+        var split,tot1,tot2;
+        resetCount();
+        if (compareImputs().length==2){
+//            console.log("disssssss");
+//            console.log(compareImputs());
+            split = compareImputs()[0].split(":");
+            tot1=getTotMins(split[0],split[1]);
+            $rootScope.pkStart = $rootScope.toRegDate(split[0],split[1]);
+            console.log($rootScope.pkStart);
+            split = compareImputs()[1].split(":");
+            tot2=getTotMins(split[0],split[1]);
+            $rootScope.pkStop = $rootScope.toRegDate(split[0],split[1]);
+            console.log($rootScope.pkStop);
+            console.log(tot1+" "+tot2+" "+getTimeDiff(tot1,tot2));
+            
+            
+            timer(getTimeDiff(tot1,tot2),1000);
+            resetInputs();
+        } else {
+            if (compareImputs()!="sry"){
+                split=compareImputs().split(":");
+                tot1 = getTotMins(split[0],split[1]);
+                $rootScope.pkStart = $rootScope.toRegDate(split[0],split[1]);
+                var d = new Date();
+                tot2 = getTotMins((d.getHours()),(d.getMinutes()));
+                tot1 = getTimeDiff(tot1,tot2);
+            } else {
+                tot1 = 0;
+            }
+            
+            timer(count+tot1,1000); 
+            resetInputs();
+        }
+    }
+    
+    $rootScope.reallyTimer = function(count) {
+        $rootScope.parkCount(count);
         $rootScope.geoFinished = false;
         $rootScope.getPosition();
+        //$rootScope.toRegDate($rootScope.h,$rootScope.m);
     };
     
     $rootScope.getPosition = function(){
@@ -68,6 +152,11 @@ angular.module('app', [])
                 enableHighAccuracy: true, timeout: 5000});
         }
     };
+    
+    $rootScope.dontGetPositionAgain= function(){
+        disparitionUp($('.dialog-geo'));
+        $rootScope.clearGPS();
+    }
     
     $rootScope.getPositionAgain= function(){
         disparitionUp($('.dialog-geo'));
@@ -80,6 +169,8 @@ angular.module('app', [])
         window.position = $rootScope.position;
         $rootScope.geoFinished = true;
 //        console.log($rootScope.geoFinished);
+        $rootScope.lat=$rootScope.position.coords.latitude;
+        $rootScope.long=$rootScope.position.coords.longitude;
         $rootScope.writeToPhone("_geoCoords",$rootScope.position.coords.latitude+'::'+$rootScope.position.coords.longitude);// LONG::LAT -> coord.split("::")
         if ($rootScope.position.coords.accuracy > 20){
             $('.dialog-geo').find('h1').text("The accuracy of your position is: "+$rootScope.position.coords.accuracy.toFixed(2)+"m. Good enough? (Turn your gps on!)");
@@ -128,8 +219,234 @@ angular.module('app', [])
     $rootScope.getDeviceName=function(){
         CordovaService.ready.then(function() {
             window.deviceName=device.platform;
+            $rootScope.devUUID=device.uuid;
+            console.log("dev uuid : "+$rootScope.devUUID);
+            $rootScope.registerUUID();
         });
     }
+    
+    /* Init form */
+    
+    $rootScope.initRegister = function(){
+        $rootScope.myForm = {};
+        $rootScope.myForm.name = "Jacky Test";
+        $rootScope.myForm.email  = "jacky@test.com";
+        $rootScope.myForm.password  = "testy";
+    }
+    
+    /* Forms */
+    
+    $rootScope.registerSubmit = function(){
+        console.log("submitting...");
+        $rootScope.dataObject = {
+            name : $rootScope.myForm.name,
+            email  : $rootScope.myForm.email,
+            password :$rootScope.myForm.password
+        };
+        
+    }
+    
+    /*Back-end coms*/
+    
+//    $rootScope.registerNewUserWithoutFacebook = function(){
+//        $http.post('http://ticketescape.m4kers.com/users', $rootScope.dataObject)
+//        .success(function(data, status, headers, config) {
+//            console.log("succescallback");
+//            console.log(data);
+//            console.log(status);
+//            console.log(headers);
+//            console.log(config);
+//        })
+//        .error(function(data, status, headers, config) {
+//            console.log("errorcallback");
+//            console.log(data);
+//            console.log(status);
+//            console.log(headers);
+//            console.log(config);
+//        });
+//    }
+    
+    $rootScope.doComsList = function(){
+        console.log("docmomlsk");
+        console.log($rootScope.comsList);
+        while ($rootScope.comsList.length){
+            $rootScope.comsList.shift().call();
+            console.log($rootScope.comsList);
+        }
+    }
+    
+    $rootScope.comsList = [
+        //        function(){ console.log("this is function: a") },
+        //        function(){ console.log("this is function: b") },
+        //        function(){ console.log("this is function: c")},
+        //        function(){$rootScope.toRegDate('12','34')},
+        //        function(){$rootScope.registerZone('green')}
+    ];
+
+    window.setInterval(function(){
+        if ($rootScope.online==true && $rootScope.comsList.length>0){
+            $rootScope.doComsList();
+        }
+    }, 15000);
+    
+    $rootScope.registerUUID = function(){
+        if ($rootScope.online==true){
+            var post_data = {'device_token':$rootScope.devUUID};
+            console.log(post_data);
+            $http.post('http://ticketescape.m4kers.com/users', post_data)
+            .success(function(data, status, headers, config) {
+                console.log("succescallback");
+                console.log(data);
+                console.log(status);
+                console.log(headers);
+                console.log(config);
+            })
+            .error(function(data, status, headers, config) {
+                console.log("errorcallback");
+                console.log(data);
+                console.log(status);
+                console.log(headers);
+                console.log(config);
+            });
+        } else {
+            $rootScope.comsList.push(function(){$rootScope.registerUUID()});
+        }
+    }
+    
+    $rootScope.registerZone = function(color,time1,time2){
+        if ($rootScope.online==true){
+            var post_data;
+            if (color=="green"){
+                post_data = {
+                    'geo_lat':$rootScope.lat,
+                    'geo_lon':$rootScope.long,
+                    'zone':'green'
+                };
+                console.log(post_data);
+                $http.post('http://ticketescape.m4kers.com/parking', post_data)
+                .success(function(data, status, headers, config) {
+                    console.log("succescallback");
+                    console.log(data);
+                    console.log(status);
+                    console.log(headers);
+                    console.log(config);
+                })
+                .error(function(data, status, headers, config) {
+                    console.log("errorcallback");
+                    console.log(data);
+                    console.log(status);
+                    console.log(headers);
+                    console.log(config);
+                });
+            } else if(color=="blue"){
+                post_data = {
+                    'geo_lat':$rootScope.lat,
+                    'geo_lon':$rootScope.long,
+                    'zone':'blue',
+                    'timestamp_start':$rootScope.pkStart
+                };
+                console.log(post_data);
+                $http.post('http://ticketescape.m4kers.com/parking', post_data)
+                .success(function(data, status, headers, config) {
+                    console.log("succescallback");
+                    console.log(data);
+                    console.log(status);
+                    console.log(headers);
+                    console.log(config);
+                })
+                .error(function(data, status, headers, config) {
+                    console.log("errorcallback");
+                    console.log(data);
+                    console.log(status);
+                    console.log(headers);
+                    console.log(config);
+                });
+            } else if(color=="orange"){
+                post_data = {
+                    'geo_lat':$rootScope.lat,
+                    'geo_lon':$rootScope.long,
+                    'zone':'blue',
+                    'timestamp_start':$rootScope.pkStart,
+                    'timestamp_end':$rootScope.pkStop
+                };
+                console.log(post_data);
+                $http.post('http://ticketescape.m4kers.com/parking', post_data)
+                .success(function(data, status, headers, config) {
+                    console.log("succescallback");
+                    console.log(data);
+                    console.log(status);
+                    console.log(headers);
+                    console.log(config);
+                })
+                .error(function(data, status, headers, config) {
+                    console.log("errorcallback");
+                    console.log(data);
+                    console.log(status);
+                    console.log(headers);
+                    console.log(config);
+                });
+            }
+        } else {
+            $rootScope.comsList.push(function(){$rootScope.registerZone(color,time1,time2)});
+        }
+
+    }
+    
+    /*"normal" offline notifications*/
+    
+    function showAlert() {
+        navigator.notification.alert(
+            'You are the winner!',  // message
+            alertDismissed,         // callback
+            'Game Over',            // title
+            'Done'                  // buttonName
+        );
+    }
+    
+    /*Push Notifications*/
+    
+    var pushNotification;
+    
+    $rootScope.pushInit=function(){
+        CordovaService.ready.then(function() {
+            pushNotification = window.plugins.pushNotification;
+//            $("#app-status-ul").append('<li>registering ' + device.platform + '</li>');
+            console.log(' registering ' + device.platform);
+            if ( device.platform == 'android' || device.platform == 'Android' || device.platform == "amazon-fireos" ){
+                pushNotification.register(
+                    successHandler,
+                    errorHandler,
+                    {
+                        "senderID":"90430114137",
+                        "ecb":"onNotification"
+                    });
+            } else if ( device.platform == 'blackberry10'){
+                pushNotification.register(
+                    successHandler,
+                    errorHandler,
+                    {
+                        invokeTargetId : "replace_with_invoke_target_id",
+                        appId: "replace_with_app_id",
+                        ppgUrl:"replace_with_ppg_url", //remove for BES pushes
+                        ecb: "pushNotificationHandler",
+                        simChangeCallback: replace_with_simChange_callback,
+                        pushTransportReadyCallback: replace_with_pushTransportReady_callback,
+                        launchApplicationOnPush: true
+                    });
+            } else {
+                pushNotification.register(
+                    tokenHandler,
+                    errorHandler,
+                    {
+                        "badge":"true",
+                        "sound":"true",
+                        "alert":"true",
+                        "ecb":"onNotificationAPN"
+                    });
+            }
+        })
+    }
+
     
     /*Bluetooth Logic*/
     
@@ -501,9 +818,35 @@ angular.module('app', [])
         }
     });
     
+    $rootScope.toRegDate = function(h,m){
+        //2014-12-30 11:55:59
+        var hh=h,mm=m;
+        console.log();
+        var today = new Date();
+        console.log("tiiiime");
+//        if (h<10){
+//            hh='0'+h;
+//        }
+//        if (m<10){
+//            mm='0'+m;
+//        }
+        console.log(today.getFullYear()+'-'+today.getMonth()+'-'+today.getDay()+' '+hh+':'+mm+':00');
+        return today.getFullYear()+'-'+today.getMonth()+'-'+today.getDay()+' '+h+':'+m+':00';
+    }
+    
+    
+    
     $rootScope.init = function () {
         var geocoder;
+        $rootScope.devUUID='testDeviceID';
+        //FINALMODE//
+        //$rootScope.getDeviceName();
+        //TESTMODE//
+        $rootScope.registerUUID();
         $rootScope.devicesMap=[];
+        //$rootScope.initRegister();
+        //$rootScope.registerSubmit();
+        //$rootScope.registerNewUserWithoutFacebook();
         $rootScope.firstLoad=true;
         $rootScope.angularLoaded=true; 
         console.log("coucou angular");
@@ -512,11 +855,11 @@ angular.module('app', [])
         $rootScope.value="";
         $rootScope.lat="";
         $rootScope.long="";
-        $rootScope.getDeviceName();
         $rootScope.loadLastCurrentData();
         //$rootScope.bluetoothInit();
         $rootScope.bluetoothIsEnabled();
         $rootScope.bluetoothToggleOn();
+        showAlert();
     };
     $rootScope.init();            
 }]);

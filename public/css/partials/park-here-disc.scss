@@ -1,7 +1,8 @@
 /* #PARK HERE DISC*/
 
 #park-here-disc,
-#park-here-meter{
+#park-here-meter,
+#park-here-red{
     time{
 
         display:block;
@@ -10,7 +11,7 @@
         font-weight:bold;
         font-family: 'Lato', sans-serif;
         margin-bottom: 50px;
-        margin-top: -15px;
+        margin-top: -5px;
 
         @media screen and (min-width: 360px){
             font-size:3em;
@@ -19,5 +20,13 @@
     
     label[for="time"]{
         margin-bottom: 50px;
+    }
+    
+    .timeInput{
+        margin-bottom: 20px;
+    } 
+
+    .confirm{
+        margin-top: 40px;
     }
 }

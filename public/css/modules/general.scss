@@ -73,6 +73,12 @@ body{
         border-color: $lightBlueBtnBorder;
         text-transform:uppercase;
     }
+    .fbBtn{
+        @include borderBtn;
+        background-color: $fbBtn;
+        border-color: $fbBtnBorder;
+        text-transform:uppercase;
+    }
 }
 
 /*STYLES SHARED AMONG EACH SECTION */

@@ -548,6 +548,17 @@ body {
     background-color: #50ade5;
     border-color: #3c86ad;
     text-transform: uppercase; }
+  body .fbBtn {
+    border-radius: 10px;
+    border-left: 0;
+    border-right: 0;
+    border-top: 0;
+    border-bottom: 4px solid;
+    padding: 10px;
+    border-color: #b5b5b4;
+    background-color: #48649C;
+    border-color: #304476;
+    text-transform: uppercase; }
 
 /*STYLES SHARED AMONG EACH SECTION */
 .newPage {
@@ -775,24 +786,41 @@ input {
     #main-screen-to-park .warning {
       font-size: 1.4em;
       margin-bottom: 30px; } }
+#main-screen-to-park .min20 {
+  margin-top: -20px; }
+#main-screen-to-park .imgTop {
+  margin-bottom: 0; }
+#main-screen-to-park .imgBottom {
+  margin-top: 0; }
 
 /* #PARK HERE DISC*/
 #park-here-disc time,
-#park-here-meter time {
+#park-here-meter time,
+#park-here-red time {
   display: block;
   font-size: 2.5em;
   text-align: center;
   font-weight: bold;
   font-family: 'Lato', sans-serif;
   margin-bottom: 50px;
-  margin-top: -15px; }
+  margin-top: -5px; }
   @media screen and (min-width: 360px) {
     #park-here-disc time,
-    #park-here-meter time {
+    #park-here-meter time,
+    #park-here-red time {
       font-size: 3em; } }
 #park-here-disc label[for="time"],
-#park-here-meter label[for="time"] {
+#park-here-meter label[for="time"],
+#park-here-red label[for="time"] {
   margin-bottom: 50px; }
+#park-here-disc .timeInput,
+#park-here-meter .timeInput,
+#park-here-red .timeInput {
+  margin-bottom: 20px; }
+#park-here-disc .confirm,
+#park-here-meter .confirm,
+#park-here-red .confirm {
+  margin-top: 40px; }
 
 /* #PARK HERE NOTES */
 #park-here-notes .content {
@@ -952,6 +980,8 @@ input {
     margin-right: 6%; }
   .dialog-delete .section .yes {
     margin-right: 0; }
+  .dialog-delete .section .fbBtn {
+    width: 80%; }
   .dialog-delete .section h1 {
     font-family: "Lato", "Roboto", "Helvetica", sans-serif;
     font-size: 18px;

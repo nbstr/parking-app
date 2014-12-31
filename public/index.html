@@ -27,6 +27,9 @@
     <script type="text/javascript" src="js/config.js"></script>
     <script type="text/javascript" src="../cordova.js"></script>
     
+    <!-- FB SDK   -->
+    <script src="lib/facebookSDK.js"></script>
+    
     <!--  blue  -->
 <!--    <script type="text/javascript" src="js/bluetooth.js"></script>-->
     
@@ -50,18 +53,25 @@
 
                 <h1>select parking type</h1>
 
-                <img class="meter_off" src="images/img_park_off.png" alt="meter off">
-                <img class="disc_off" src="images/img_disc_off.png" alt="disc off">
-
+<!--
+                <img class="imgTop meter_off" src="images/img_park_off.png" alt="meter off">
+                <img class="imgTop disc_off" src="images/img_disc_off.png" alt="disc off">
+                <img class="imgBottom min20" src="http://placehold.it/350x150" ng-click="registerZone('green')">
+                <img class="imgBottom min20" src="http://placehold.it/350x150">
+-->             <a href="#main-screen-parked" ng-click="registerZone('green')" data-role="none" data-transition="flip"><img class="imgTop" src="images/icons-split-01.png"></a>
+                <a href="#park-here-disc" data-role="none" data-transition="flip"><img class="imgTop" src="images/icons-split-02.png"></a>
+                <a href="#park-here-meter" data-role="none" data-transition="flip"><img class="imgBottom min20" src="images/icons-split-03.png"></a>
+                <a href="#park-here-red"><img class="imgBottom min20" src="images/icons-split-04.png"></a>
+                
+                
                  <div class="btn-group">
-                    <div class="blueBtn link">park here<a href=""  data-role="none" data-transition="flip"></a></div>
-                    <div class="redBtn link">report controller<a href="#report-controller" data-role="none" data-transition="flip"></a></div>
+<!--                    <div class="blueBtn greyed link">park here<a href=""  data-role="none" data-transition="flip"></a></div>-->
+                     <div class="redBtn link" onclick="apparitionDown('.dialog-share');">report controller<a href="#report-controller" data-role="none" data-transition="flip"></a></div>
                 </div>
                 
             </div>
 
         </div>
-
 
         <div id="park-here-meter" data-role="page" class="newPage">
             <nav>
@@ -70,13 +80,14 @@
 
             <div class="content" data-role="content">
             
-                <img src="images/img_park_on.png" alt="parking meter on" data-role="none">
+                <img src="images/icons-split-03.png" alt="parking meter on" data-role="none">
 
-                <label for="time"><input type="time" name="time" id="time" data-role="none" /></label>
+                <label for="timeStartParkMeter">Start <input class="timeInput" type="time" name="timeStartParkMeter" id="timeStartParkMeter" data-role="none" ng-model="timeStartParkMeter"/></label>
+                <label for="timeEndParkMeter">End <input class="timeInput" type="time" name="timeEndParkMeter" id="timeEndParkMeter" data-role="none" /></label>
 
                 <div class="btn-group">
         <!--            <div class="greenBtn link">parking notes<a href="#park-here-notes" data-role="none" data-transition="flip"></a></div>-->
-                    <div class="blueBtn link" ng-click="reallyTime()">confirm<a href="#main-screen-parked" data-role="none" data-transition="flip"></a></div>
+                    <div class="blueBtn link confirm" ng-click="reallyTimer();registerZone('orange',pkStart,pkStop)">confirm<a href="#main-screen-parked" data-role="none" data-transition="flip"></a></div>
                 </div>
                 
             </div>
@@ -90,15 +101,37 @@
 
             <div class="content" data-role="content">
             
-                <img src="images/img_disc_on.png" alt="parking disc" >
+                <img src="images/icons-split-02.png" alt="parking disc" >
 
-                    <time datetime="02:00">2:00</time>
+                <label for="timeStartBlue">Start <input class="timeInput" type="time" name="timeStartBlue" id="timeStartBlue" data-role="none" /></label>
+                <label for="timeEndBlue">Lasts <time datetime="02:00">2:00</time></label>
 
                 <div class="btn-group">
         <!--            <div class="greenBtn link"><a href="#park-here-notes" data-role="none" data-transition="flip"></a>parking notes</div>-->
-                    <div class="blueBtn link" ng-click="reallyTimer(120,1000)">confirm<a href="#main-screen-parked" data-role="none" data-transition="flip"></a></div>
+                    <div class="blueBtn link" ng-click="reallyTimer(120);registerZone('blue',pkStart)">confirm<a href="#main-screen-parked" data-role="none" data-transition="flip"></a></div>
                 </div>
                 
+            </div>
+
+        </div>
+        
+        <div id="park-here-red" data-role="page" class="newPage">
+            <nav>
+                <span><a href="#main-screen-to-park" data-role="none" data-transition="flip">back</a></span>
+            </nav>
+
+            <div class="content" data-role="content">
+
+                <img src="images/icons-split-04.png" alt="parking disc" >
+
+                <label for="timeStartRed">Start <input class="timeInput" type="time" name="timeStartRed" id="timeStartRed" data-role="none" /></label>
+                <label for="timeEndRed">Lasts <time datetime="00:15">0:15</time></label>
+
+                <div class="btn-group">
+                    <!--            <div class="greenBtn link"><a href="#park-here-notes" data-role="none" data-transition="flip"></a>parking notes</div>-->
+                    <div class="blueBtn link" ng-click="reallyTimer(15);registerZone('red',pkStart)">confirm<a href="#main-screen-parked" data-role="none" data-transition="flip"></a></div>
+                </div>
+
             </div>
 
         </div>
@@ -138,7 +171,7 @@
                     <div class="lightGreenBtn link"><a href="#park-here-notes" data-role="none" data-transition="flip"></a>parking notes</div>
                     <div class="blueBtn link" onclick="extendCount(120)">extend stay<a href="#" data-role="none"></a></div>
                     <div class="lightBlueBtn link" ng-show="geoFinished">dude, where's my car ?<a href="#map" data-role="none" data-transition="flip"></a></div>
-                    <div class="redBtn link">report controller<a href="#report-controller" data-role="none" data-transition="flip"></a></div>
+                    <div class="redBtn link" onclick="apparitionDown('.dialog-login');">report controller<a href="#report-controller" data-role="none" data-transition="flip"></a></div>
                 </div>
                 
             </div>
@@ -218,8 +251,33 @@
                 <h1>Good?</h1>
             </div>
             <div class="yn">
-                <div class="redBtn no link" ng-click="disparitionUp('.dialog-geo');getPositionAgain();">No</div>
-                <div class="blueBtn yes link" ng-click="disparitionUp('.dialog-geo');clearGPS();">yes</div>
+                <div class="redBtn no link" ng-click="getPositionAgain();">No</div>
+                <div class="blueBtn yes link" ng-click="dontGetPositionAgain();">yes</div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="dialog-delete dialog-share dialog">
+        <div class="background" onclick="disparitionUp('.dialog-share');"></div>
+        <div class="section">
+            <div class="title" onclick="disparitionUp('.dialog-share')">
+                <h1>Would you like to share this on facebook?</h1>
+            </div>
+            <div class="yn">
+<!--                <div class="redBtn no link" onclick="disparitionUp('.dialog-share')">No</div>-->
+                <div class="yes link fbBtn" onclick="disparitionUp('.dialog-share')">Share</div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="dialog-delete dialog-login dialog" onclick="disparitionUp('.dialog-login');">
+        <div class="background" onclick="disparitionUp('.dialog-login');"></div>
+        <div class="section">
+            <div class="title" onclick="disparitionUp('.dialog-login')">
+                <h1>Would you like to register and share this on facebook?</h1>
+            </div>
+            <div class="yn">
+                <div class="yes link fbBtn" onclick="disparitionUp('.dialog-login')">Login</div>
             </div>
         </div>
     </div>
