@@ -58,9 +58,9 @@
                 <img class="imgTop disc_off" src="images/img_disc_off.png" alt="disc off">
                 <img class="imgBottom min20" src="http://placehold.it/350x150" ng-click="registerZone('green')">
                 <img class="imgBottom min20" src="http://placehold.it/350x150">
--->             <a href="#main-screen-parked" ng-click="registerZone('green')" data-role="none" data-transition="flip"><img class="imgTop" src="images/icons-split-01.png"></a>
+-->             <a href="#main-screen-parked" ng-hide="online" ng-click="registerZone('green')" data-role="none" data-transition="flip"><img class="imgTop" src="images/icons-split-01.png"></a>
                 <a href="#park-here-disc" data-role="none" data-transition="flip"><img class="imgTop" src="images/icons-split-02.png"></a>
-                <a href="#park-here-meter" data-role="none" data-transition="flip"><img class="imgBottom min20" src="images/icons-split-03.png"></a>
+                <a href="#park-here-meter" ng-click="allAlerts(5000)" data-role="none" data-transition="flip"><img class="imgBottom min20" src="images/icons-split-03.png"></a>
                 <a href="#park-here-red"><img class="imgBottom min20" src="images/icons-split-04.png"></a>
                 
                 

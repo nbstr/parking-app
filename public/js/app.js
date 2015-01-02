@@ -30,23 +30,23 @@ angular.module('app', [])
      }, 3000);
  }])
 
-.run(function($window, $rootScope) {
+.run(['$window','$rootScope','CordovaService','$http', function($window,$rootScope,CordovaService,$http) {
+    
+    $rootScope.geoFinished = false;
+    
     $rootScope.online = navigator.onLine;
     $window.addEventListener("offline", function () {
         $rootScope.$apply(function() {
             $rootScope.online = false;
+//            alert("online");
         });
     }, false);
     $window.addEventListener("online", function () {
         $rootScope.$apply(function() {
             $rootScope.online = true;
+//            alert("offline");
         });
     }, false);
-})
-
-.run(['$rootScope','CordovaService','$http', function($rootScope,CordovaService,$http) {
-    
-    $rootScope.geoFinished = false;
     
 //    $rootScope.reallyTime = function() {
 //        parkCount();
@@ -81,7 +81,7 @@ angular.module('app', [])
     }
     
     var getTimeDiff = function(tot1,tot2){
-        if (tot1>tot2){
+        if (tot1>=tot2){
             return tot1-tot2;
         } else {
 //            console.log(tot2-tot1);
@@ -89,20 +89,9 @@ angular.module('app', [])
             return (24*60)-(tot2-tot1);
         }
     }
-    
-//    $rootScope.plus15 = function(){
-//        console.log("plus15");
-//        var tmp = $("input[name='timeStartParkMeter']").val();
-//        var d = new Date(tmp);
-//        console.log("dddddd");
-//        console.log(d);
-////        var split = $("input[name='timeStartParkMeter']").val().split(':');
-////        console.log();
-//        $("input[name='timeEndParkMeter']").val($("input[name='timeStartParkMeter']").val());
-//    }
 
     $rootScope.parkCount= function(count){
-        var split,tot1,tot2;
+        var split,tot1,tot2,total;
         resetCount();
         if (compareImputs().length==2){
 //            console.log("disssssss");
@@ -117,8 +106,8 @@ angular.module('app', [])
             console.log($rootScope.pkStop);
             console.log(tot1+" "+tot2+" "+getTimeDiff(tot1,tot2));
             
-            
-            timer(getTimeDiff(tot1,tot2),1000);
+            total=getTimeDiff(tot1,tot2);
+            timer(total,1000);
             resetInputs();
         } else {
             if (compareImputs()!="sry"){
@@ -131,10 +120,16 @@ angular.module('app', [])
             } else {
                 tot1 = 0;
             }
-            
-            timer(count+tot1,1000); 
+            total=count+tot1;
+            timer(total,1000); 
             resetInputs();
         }
+        
+        if (total>30){
+            $rootScope.allAlerts(1,"Time's nearly up!","There is 30 mins left!",(total-30)*1000);
+        }
+        $rootScope.allAlerts(2,"Time's nearly up!","There is only 5 mins left!",(total-5)*1000);
+        
     }
     
     $rootScope.reallyTimer = function(count) {
@@ -270,10 +265,24 @@ angular.module('app', [])
         console.log("docmomlsk");
         console.log($rootScope.comsList);
         while ($rootScope.comsList.length){
-            $rootScope.comsList.shift().call();
+            var task=$rootScope.comsList.shift();
+            if (task.func == 'regzone'){
+                $rootScope.pkStart=task.time1;
+                $rootScope.pkStop=task.time2;
+                $rootScope.registerZone(task.color);
+            } else if (task.func == 'uuid'){
+                $rootScope.registerUUID();
+            }
             console.log($rootScope.comsList);
         }
     }
+//    [
+//        {
+//            "date":"...",
+//            "func":"...",
+//            "data":{...}
+//        }
+//    ]
     
     $rootScope.comsList = [
         //        function(){ console.log("this is function: a") },
@@ -282,12 +291,25 @@ angular.module('app', [])
         //        function(){$rootScope.toRegDate('12','34')},
         //        function(){$rootScope.registerZone('green')}
     ];
+    
+    $rootScope.storeComsList = function() {
+//        $rootScope.writeToPhone('_comsList',$rootScope.comsList);
+    }
+    
+//    function(data){
+//        //...
+//    }
 
+    //use angular interval
     window.setInterval(function(){
+        console.log("interval");
+        $rootScope.loadLastCurrentData();
+//        console.log($rootScope.online);
+//        console.log($rootScope.comsList);
         if ($rootScope.online==true && $rootScope.comsList.length>0){
             $rootScope.doComsList();
         }
-    }, 15000);
+    }, 10000);//make loner before release
     
     $rootScope.registerUUID = function(){
         if ($rootScope.online==true){
@@ -309,11 +331,20 @@ angular.module('app', [])
                 console.log(config);
             });
         } else {
-            $rootScope.comsList.push(function(){$rootScope.registerUUID()});
+            $rootScope.comsList.push({'func':'uuid'});
+            $rootScope.storeComsList();
         }
     }
     
-    $rootScope.registerZone = function(color,time1,time2){
+    $rootScope.registerZone = function(color){
+//        if(time1==undefined){
+//            time1="undefined";
+//        }
+//        if(time2=undefined){
+//            time2="undefined";
+//        }
+        var d = new Date();
+        $rootScope.color = color;
         if ($rootScope.online==true){
             var post_data;
             if (color=="green"){
@@ -337,8 +368,14 @@ angular.module('app', [])
                     console.log(status);
                     console.log(headers);
                     console.log(config);
+                    console.log("error, puttin in array");
+                    $rootScope.comsList.push({'func':'regzone','color':color,'time1':$rootScope.pkStart,'time2':$rootScope.pkStop});
+                    $rootScope.storeComsList();
                 });
             } else if(color=="blue"){
+                if($rootScope.pkStart==undefined){
+                    $rootScope.pkStart=$rootScope.toRegDate(d.getHours,d.getMinutes);
+                }
                 post_data = {
                     'geo_lat':$rootScope.lat,
                     'geo_lon':$rootScope.long,
@@ -360,8 +397,17 @@ angular.module('app', [])
                     console.log(status);
                     console.log(headers);
                     console.log(config);
+                    console.log("error, puttin in array");
+                    $rootScope.comsList.push({'func':'regzone','color':color,'time1':$rootScope.pkStart,'time2':$rootScope.pkStop});
+                    $rootScope.storeComsList();
                 });
             } else if(color=="orange"){
+                if($rootScope.pkStart==undefined){
+                    $rootScope.pkStart=$rootScope.toRegDate(d.getHours,d.getMinutes);
+                }
+                if($rootScope.pkStop=undefined){
+                    $rootScope.pkStop="undefined";
+                }
                 post_data = {
                     'geo_lat':$rootScope.lat,
                     'geo_lon':$rootScope.long,
@@ -384,17 +430,37 @@ angular.module('app', [])
                     console.log(status);
                     console.log(headers);
                     console.log(config);
+                    console.log("error, puttin in array");
+                    $rootScope.comsList.push({'func':'regzone','color':color,'time1':$rootScope.pkStart,'time2':$rootScope.pkStop});
+                    $rootScope.storeComsList();
                 });
             }
         } else {
-            $rootScope.comsList.push(function(){$rootScope.registerZone(color,time1,time2)});
+//            $rootScope.comsList.push(function(){$rootScope.registerZone(color)});
+            console.log("offline, puttin in array");
+            $rootScope.comsList.push({'func':'regzone','color':color,'time1':$rootScope.pkStart,'time2':$rootScope.pkStop});
+            $rootScope.storeComsList();
         }
 
     }
     
     /*"normal" offline notifications*/
     
-    function showAlert() {
+    function alertDismissed() {
+        alert("Dismissed!");
+    }
+    
+    $rootScope.allAlerts = function(id,title,text,timeInMilliseconds){
+        setTimeout(function(){
+            //$rootScope.playBeep();
+            $rootScope.vibrate();
+            var d = new Date();
+            $rootScope.notificationAdd(id,title,text);
+        },timeInMilliseconds);
+    }
+    
+    $rootScope.showAlert = function() {
+        console.log("should show alert");
         navigator.notification.alert(
             'You are the winner!',  // message
             alertDismissed,         // callback
@@ -402,6 +468,54 @@ angular.module('app', [])
             'Done'                  // buttonName
         );
     }
+    
+    $rootScope.playBeep = function() {
+        console.log("should play beep");
+        navigator.notification.beep(3);
+    }
+
+    $rootScope.vibrate = function() {
+        console.log("should vibrate");
+        navigator.notification.vibrate(2000);
+    }
+    
+    /*to ontification tray*/
+
+    $rootScope.notificationAdd=function(id,title,message){
+        CordovaService.ready.then(function() {
+            window.plugin.notification.local.add({
+                id:         id,  // A unique id of the notification
+//                date:       date,    // This expects a date object
+                message:    message,  // The message that is displayed
+                title:      title,  // The title of the message
+//                repeat:     String,  // Either 'secondly', 'minutely', 'hourly', 'daily', 'weekly', 'monthly' or 'yearly'
+//                badge:      Number,  // Displays number badge to notification
+//                sound:      String,  // A sound to be played
+//                json:       "",  // Data to be passed through the notification
+                autoCancel: true, // Setting this flag and the notification is automatically cancelled when the user clicks it
+                ongoing:    false, // Prevent clearing of notification (Android only)
+            });
+//            window.plugin.notification.local.add({ message: message });
+        });
+    }
+    
+    $rootScope.notificationhasPermission=function(){
+        CordovaService.ready.then(function() {
+            window.plugin.notification.local.hasPermission(function (granted) {
+                console.log('Permission has been granted: ' + granted);
+
+                console.log(window.plugin.notification.local);
+            });
+        });
+    }
+    
+//    $rootScope.notificationRegisterPermission=function(){
+//        CordovaService.ready.then(function() {
+//            window.plugin.notification.local.registerPermission(function (granted) {
+//                console.log('Permission has been granted: ' + granted);
+//            });
+//        });
+//    }
     
     /*Push Notifications*/
     
@@ -678,6 +792,7 @@ angular.module('app', [])
         reader.onloadend = function(evt) {
             console.log("Entered Read.");
             $rootScope.$apply(function(){
+                console.log(evt.target.result);
                 $rootScope.currentData={};
                 $rootScope.currentData=JSON.parse(evt.target.result);
                 $rootScope.loadLast($('textarea'),$rootScope.currentData);
@@ -754,10 +869,10 @@ angular.module('app', [])
                     afterChange = tmp.slice(tmp.indexOf(key)+key.length+3,tmp.length),
                     append = afterChange.slice(afterChange.indexOf('"'),tmp.length);
                 tmp = prepend + change + append;
-//                console.log(prepend);
-//                console.log(change);
-//                console.log(append);
-//                console.log(tmp);
+                console.log(prepend);
+                console.log(change);
+                console.log(append);
+                console.log(tmp);
                 $rootScope.writeData(JSON.parse(tmp));
             }
         }
@@ -769,12 +884,21 @@ angular.module('app', [])
     }
     
     $rootScope.writeToPhone=function(key,value){
+        var comString ="";
         console.log("Entered writeToPhone");
         $rootScope.key=key;
         if (typeof(value) == "string" && value.charAt(0)!="."){
             console.log(value);
             console.log(value.charAt(0));
             $rootScope.value=value;
+        } else if(value.constructor === Array){
+            console.log("its an array");
+            for (var test=0;test<value.length;test++){
+                console.log(value[test]);
+                comString += JSON.stringify(value[test]);
+                $rootScope.value=comString;
+            }
+            console.log(comString);
         } else {
             $rootScope.value=$(value).val();
         }
@@ -802,6 +926,9 @@ angular.module('app', [])
                 //console.log(value._activePage);
             }
         }
+//        if (value._comsList){
+//            $rootScope.comsList=value._comsList;
+//        }
         console.log("Finshed loadLAst");
     }
     
@@ -859,7 +986,9 @@ angular.module('app', [])
         //$rootScope.bluetoothInit();
         $rootScope.bluetoothIsEnabled();
         $rootScope.bluetoothToggleOn();
-        showAlert();
+        $rootScope.notificationhasPermission();
+//        $rootScope.notificationRegisterPermission();
+        //showAlert();
     };
     $rootScope.init();            
 }]);
