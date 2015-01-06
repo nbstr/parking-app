@@ -61,6 +61,8 @@ angular.module('app', [])
             return [$("input[name='timeStartParkMeter']").val(),$("input[name='timeEndParkMeter']").val()];
         } else if($("input[name='timeStartBlue']").val()!="") {
             return $("input[name='timeStartBlue']").val();
+        } else if ($("input[name='timeStartRed']").val()!="") {
+            return $("input[name='timeStartRed']").val();
         } else {
             return ("sry");
         }
@@ -93,6 +95,7 @@ angular.module('app', [])
     $rootScope.parkCount= function(count){
         var split,tot1,tot2,total;
         resetCount();
+        console.log(compareImputs());
         if (compareImputs().length==2){
 //            console.log("disssssss");
 //            console.log(compareImputs());
@@ -124,7 +127,7 @@ angular.module('app', [])
             timer(total,1000); 
             resetInputs();
         }
-        
+        $rootScope.notificationCancelAll();
         if (total>30){
             $rootScope.allAlerts(1,"Time's nearly up!","There is 30 mins left!",(total-30)*1000);
         }
@@ -220,27 +223,6 @@ angular.module('app', [])
         });
     }
     
-    /* Init form */
-    
-    $rootScope.initRegister = function(){
-        $rootScope.myForm = {};
-        $rootScope.myForm.name = "Jacky Test";
-        $rootScope.myForm.email  = "jacky@test.com";
-        $rootScope.myForm.password  = "testy";
-    }
-    
-    /* Forms */
-    
-    $rootScope.registerSubmit = function(){
-        console.log("submitting...");
-        $rootScope.dataObject = {
-            name : $rootScope.myForm.name,
-            email  : $rootScope.myForm.email,
-            password :$rootScope.myForm.password
-        };
-        
-    }
-    
     /*Back-end coms*/
     
 //    $rootScope.registerNewUserWithoutFacebook = function(){
@@ -293,7 +275,7 @@ angular.module('app', [])
     ];
     
     $rootScope.storeComsList = function() {
-//        $rootScope.writeToPhone('_comsList',$rootScope.comsList);
+        $rootScope.writeToPhone('_comsList',$rootScope.comsList);
     }
     
 //    function(data){
@@ -301,15 +283,40 @@ angular.module('app', [])
 //    }
 
     //use angular interval
-    window.setInterval(function(){
-        console.log("interval");
-        $rootScope.loadLastCurrentData();
-//        console.log($rootScope.online);
-//        console.log($rootScope.comsList);
-        if ($rootScope.online==true && $rootScope.comsList.length>0){
-            $rootScope.doComsList();
+//    window.setInterval(function(){
+//        console.log("interval");
+//        $rootScope.loadLastCurrentData();
+////        console.log($rootScope.online);
+////        console.log($rootScope.comsList);
+//        if ($rootScope.online==true && $rootScope.comsList.length>0){
+//            $rootScope.doComsList();
+//        }
+//    }, 10000);//make loner before release
+    
+    $rootScope.registerRegID = function(regid){
+        if ($rootScope.online==true){
+            var post_data = {'device_token':$rootScope.devUUID,'device_notification_token':regid,'app_name':'TicketEscape_droid'};
+            console.log(post_data);
+            $http.post('http://ticketescape.m4kers.com/users/registration_id', post_data)
+            .success(function(data, status, headers, config) {
+                console.log("succescallback");
+                console.log(data);
+                console.log(status);
+                console.log(headers);
+                console.log(config);
+            })
+            .error(function(data, status, headers, config) {
+                console.log("errorcallback");
+                console.log(data);
+                console.log(status);
+                console.log(headers);
+                console.log(config);
+            });
+        } else {
+            $rootScope.comsList.push({'func':'regid'});
+            $rootScope.storeComsList();
         }
-    }, 10000);//make loner before release
+    }
     
     $rootScope.registerUUID = function(){
         if ($rootScope.online==true){
@@ -374,7 +381,7 @@ angular.module('app', [])
                 });
             } else if(color=="blue"){
                 if($rootScope.pkStart==undefined){
-                    $rootScope.pkStart=$rootScope.toRegDate(d.getHours,d.getMinutes);
+                    $rootScope.pkStart=$rootScope.toRegDate(d.getHours(),d.getMinutes());
                 }
                 post_data = {
                     'geo_lat':$rootScope.lat,
@@ -403,7 +410,7 @@ angular.module('app', [])
                 });
             } else if(color=="orange"){
                 if($rootScope.pkStart==undefined){
-                    $rootScope.pkStart=$rootScope.toRegDate(d.getHours,d.getMinutes);
+                    $rootScope.pkStart=$rootScope.toRegDate(d.getHours(),d.getMinutes());
                 }
                 if($rootScope.pkStop=undefined){
                     $rootScope.pkStop="undefined";
@@ -480,6 +487,13 @@ angular.module('app', [])
     }
     
     /*to ontification tray*/
+    
+    $rootScope.notificationCancelAll = function() {
+        window.plugin.notification.local.cancelAll(function () {
+            // All notifications have been cancelled
+            console.log("canceled all");
+        });
+    }
 
     $rootScope.notificationAdd=function(id,title,message){
         CordovaService.ready.then(function() {
@@ -523,21 +537,29 @@ angular.module('app', [])
     
     $rootScope.pushInit=function(){
         CordovaService.ready.then(function() {
-            pushNotification = window.plugins.pushNotification;
+            document.addEventListener("deviceready", function(){
+                pushNotification = window.plugins.pushNotification;
+            });
+        })
+    }
+    
+    $rootScope.pushRegister=function(){
+        CordovaService.ready.then(function() {
 //            $("#app-status-ul").append('<li>registering ' + device.platform + '</li>');
             console.log(' registering ' + device.platform);
             if ( device.platform == 'android' || device.platform == 'Android' || device.platform == "amazon-fireos" ){
+                console.log("is an android");
                 pushNotification.register(
-                    successHandler,
-                    errorHandler,
+                    $rootScope.successHandler,
+                    $rootScope.errorHandler,
                     {
-                        "senderID":"90430114137",
+                        "senderID":"1041626889289",
                         "ecb":"onNotification"
                     });
             } else if ( device.platform == 'blackberry10'){
                 pushNotification.register(
-                    successHandler,
-                    errorHandler,
+                    $rootScope.successHandler,
+                    $rootScope.errorHandler,
                     {
                         invokeTargetId : "replace_with_invoke_target_id",
                         appId: "replace_with_app_id",
@@ -549,8 +571,8 @@ angular.module('app', [])
                     });
             } else {
                 pushNotification.register(
-                    tokenHandler,
-                    errorHandler,
+                    $rootScope.tokenHandler,
+                    $rootScope.errorHandler,
                     {
                         "badge":"true",
                         "sound":"true",
@@ -559,6 +581,112 @@ angular.module('app', [])
                     });
             }
         })
+    }
+    
+    //might have to register/unregister for each interactions
+    
+    $rootScope.successHandler = function(result) {
+        console.log('result = ' + result);
+    }
+    
+    $rootScope.errorHandler = function(error) {
+        console.log('error = ' + error);
+    }
+    
+    // Android and Amazon Fire OS
+    window.onNotification = function(e) {
+        //$("#app-status-ul").append('<li>EVENT -> RECEIVED:' + e.event + '</li>');
+        console.log("app status 'received' :"+ e.event);
+
+        switch( e.event )
+        {
+            case 'registered':
+                if ( e.regid.length > 0 )
+                {
+//                    $("#app-status-ul").append('<li>REGISTERED -> REGID:' + e.regid + "</li>");
+                    console.log("app status 'registered' :"+ e.regid);
+                    // Your GCM push server needs to know the regID before it can push to this device
+                    // here is where you might want to send it the regID for later use.
+                    console.log("regID = " + e.regid);
+                    $rootScope.registerRegID(e.regid);
+                }
+                break;
+
+            case 'message':
+                // if this flag is set, this notification happened while we were in the foreground.
+                // you might want to play a sound to get the user's attention, throw up a dialog, etc.
+                if ( e.foreground )
+                {
+//                    $("#app-status-ul").append('<li>--INLINE NOTIFICATION--' + '</li>');
+                    console.log("app status 'inline notification' :"+ e.regid);
+                    
+
+                    // on Android soundname is outside the payload.
+                    // On Amazon FireOS all custom attributes are contained within payload
+                    var soundfile = e.soundname || e.payload.sound;
+                    // if the notification contains a soundname, play it.
+                    var my_media = new Media("/android_asset/www/"+ soundfile);
+                    my_media.play();
+                }
+                else
+                {  // otherwise we were launched because the user touched a notification in the notification tray.
+                    if ( e.coldstart )
+                    {
+                        //$("#app-status-ul").append('<li>--COLDSTART NOTIFICATION--' + '</li>');
+                        console.log("COLDSTART NOTIFICATION");
+                    }
+                    else
+                    {
+//                        $("#app-status-ul").append('<li>--BACKGROUND NOTIFICATION--' + '</li>');
+                        console.log("BACKGROUND NOTIFICATION");
+                    }
+                }
+
+//                $("#app-status-ul").append('<li>MESSAGE -> MSG: ' + e.payload.message + '</li>');
+                console.log('MESSAGE -> MSG: ' + e.payload.message);
+                //Only works for GCM
+//                $("#app-status-ul").append('<li>MESSAGE -> MSGCNT: ' + e.payload.msgcnt + '</li>');
+                console.log('MESSAGE -> MSGCNT: ' + e.payload.msgcnt + '');
+                //Only works on Amazon Fire OS
+//                $status.append('<li>MESSAGE -> TIME: ' + e.payload.timeStamp + '</li>');
+                console.log('MESSAGE -> TIME: ' + e.payload.timeStamp + '');
+                break;
+
+            case 'error':
+//                $("#app-status-ul").append('<li>ERROR -> MSG:' + e.msg + '</li>');
+                console.log('ERROR -> MSG:' + e.msg + '');
+                break;
+
+            default:
+//                $("#app-status-ul").append('<li>EVENT -> Unknown, an event was received and we do not know what it is</li>');
+                console.log('EVENT -> Unknown, an event was received and we do not know what it is');
+                break;
+        }
+    }
+    
+    // iOS
+    function onNotificationAPN (event) {
+        if ( event.alert )
+        {
+            navigator.notification.alert(event.alert);
+        }
+
+        if ( event.sound )
+        {
+            var snd = new Media(event.sound);
+            snd.play();
+        }
+
+        if ( event.badge )
+        {
+            pushNotification.setApplicationIconBadgeNumber(successHandler, errorHandler, event.badge);
+        }
+    }
+    
+    $rootScope.tokenHandler = function(result) {
+        // Your iOS push server needs to know the token before it can push to this device
+        // here is where you might want to send it the token for later use.
+        alert('device token = ' + result);
     }
 
     
@@ -708,12 +836,12 @@ angular.module('app', [])
     
     $rootScope.blSuccess = function(){
         console.log("bluetooth successfully turned on");
-        $rootScope.bluetoothStartDiscovery();
+        $rootScope.bluetoothStartDiscovery(null);
     }
     
-    $rootScope.bluetoothStartDiscovery = function(){
+    $rootScope.bluetoothStartDiscovery = function(options){
         CordovaService.ready.then(function() {
-            window.bluetooth.startDiscovery($rootScope.onDeviceDiscovered,$rootScope.onDiscoveryFinished,$rootScope.onError,null);//last is options
+            window.bluetooth.startDiscovery($rootScope.onDeviceDiscovered,$rootScope.onDiscoveryFinished,$rootScope.onError,options);//last is options
         });
     }
     
@@ -728,9 +856,30 @@ angular.module('app', [])
         console.log("dicovery finished with success");
         console.log("map:");
         console.log($rootScope.devicesMap);
-        $rootScope.bluetoothPair();
+        //$rootScope.bluetoothPair();
     }
     
+    $rootScope.bluetoothIsPaired = function(address){
+        CordovaService.ready.then(function() {
+            window.bluetooth.isPaired($rootScope.onResult, $rootScope.onError, address)
+        });
+    }
+    
+    $rootScope.onResult = function(a){
+        console.log("on Result");
+        console.log(a);
+    }
+    
+    $rootScope.bluetoothPair = function(address){
+        CordovaService.ready.then(function() {
+            window.bluetooth.pair($rootScope.onDevicePaired, $rootScope.onError, address)
+        });
+    }
+    
+    $rootScope.onDevicePaired = function(a){
+        console.log("device paired?");
+        console.log(a);
+    }
 
     $rootScope.bluetoothPair = function(){
         //atm we know device, how will we know which mac adresses are buzzers?
@@ -747,6 +896,29 @@ angular.module('app', [])
     
     $rootScope.onPairSuccess = function(a){
         console.log("Pair sucessfull");
+        console.log(a);
+    }
+    
+    $rootScope.bluetoothIsConnected = function(address){
+        CordovaService.ready.then(function() {
+            window.bluetooth.isConnected($rootScope.onResult, $rootScope.onError)
+        });
+    }
+    
+    $rootScope.bluetoothIsConnectionManaged = function(address){
+        CordovaService.ready.then(function() {
+            window.bluetooth.isConnectionManaged($rootScope.onResult, $rootScope.onError)
+        });
+    }
+    
+    $rootScope.bluetoothConnect = function(options){
+        CordovaService.ready.then(function() {
+            window.bluetooth.connect($rootScope.onBluetoothConnected, $rootScope.onError, options)
+        });
+    }
+    
+    $rootScope.onBluetoothConnected = function(a){
+        console.log("isConnected?");
         console.log(a);
     }
     
@@ -794,12 +966,13 @@ angular.module('app', [])
             $rootScope.$apply(function(){
                 console.log(evt.target.result);
                 $rootScope.currentData={};
-                $rootScope.currentData=JSON.parse(evt.target.result);
+                if (evt.target.result){
+                    $rootScope.currentData=JSON.parse(evt.target.result);
                 $rootScope.loadLast($('textarea'),$rootScope.currentData);
 //                console.log($rootScope.currentData);
-                window.rscd=$rootScope.currentData;
+//                window.rscd=$rootScope.currentData;
+                }
                 $rootScope.firstLoad=false;
-//                console.log("Read completed.");
             });
         };
         reader.readAsText(file);
@@ -824,12 +997,9 @@ angular.module('app', [])
 //            console.log("***");
 //            console.log($rootScope.currentData);
 //            console.log(JSON.stringify($rootScope.currentData));
-//            console.log("Write completed.");
-//            if ($rootScope.key!=="" && $rootScope.value!==""){
-//                $rootScope.jsonWriteData($rootScope.key,$rootScope.value);
-//            }
         };
         writer.write(JSON.stringify($rootScope.currentData));
+//        writer.write(($rootScope.currentData));
     }
     
     //Handle error
@@ -874,6 +1044,7 @@ angular.module('app', [])
                 console.log(append);
                 console.log(tmp);
                 $rootScope.writeData(JSON.parse(tmp));
+//                $rootScope.writeData(tmp);
             }
         }
         
@@ -896,7 +1067,10 @@ angular.module('app', [])
             for (var test=0;test<value.length;test++){
                 console.log(value[test]);
                 comString += JSON.stringify(value[test]);
-                $rootScope.value=comString;
+//                var tez = comString.replace('"',"'");
+//                $rootScope.value=comString;
+                var tez = "'" + comString + "'";
+                $rootScope.value=tez;
             }
             console.log(comString);
         } else {
@@ -926,9 +1100,9 @@ angular.module('app', [])
                 //console.log(value._activePage);
             }
         }
-//        if (value._comsList){
-//            $rootScope.comsList=value._comsList;
-//        }
+        if (value._comsList){
+            $rootScope.comsList=value._comsList;
+        }
         console.log("Finshed loadLAst");
     }
     
@@ -965,9 +1139,9 @@ angular.module('app', [])
     
     $rootScope.init = function () {
         var geocoder;
-        $rootScope.devUUID='testDeviceID';
-        //FINALMODE//
-        //$rootScope.getDeviceName();
+        $rootScope.getDeviceName();
+        //TESTMODE//
+        //$rootScope.devUUID='testDeviceID';
         //TESTMODE//
         $rootScope.registerUUID();
         $rootScope.devicesMap=[];
@@ -989,6 +1163,8 @@ angular.module('app', [])
         $rootScope.notificationhasPermission();
 //        $rootScope.notificationRegisterPermission();
         //showAlert();
+        $rootScope.pushInit();
+        $rootScope.pushRegister();
     };
     $rootScope.init();            
 }]);
